@@ -151,7 +151,7 @@ header{
 }
 .s-band .band-lower{
   position:absolute;left:0;top:40.2%;right:0;bottom:0;
-  background:url('assets/images/stmt-large-bg.png') bottom/cover;
+  background:url('assets/images/stmt-large-bg.png') 0 0/100% 100%;
 }
 
 /* ── 五位堂工業の鋳物 ── */
@@ -606,8 +606,8 @@ footer{
     height:clamp(200px,34vw,650px);
     margin-top:clamp(-300px,-18vw,-80px);
   }
-  /* PC: bottom anchors forest base — avoids grey sky on left side (diagonal forest line) */
-  .s-band .band-lower{background-position:bottom;}
+  /* PC: 100% 100% stretches image to fill — no sky gap regardless of viewport width */
+  .s-band .band-lower{background-size:100% 100%;background-position:0 0;}
 
   /* ── Imono ── */
   .s-imono{padding:clamp(30px,4.4vw,84px) 0}/* #49: halve top space above heading */
@@ -643,14 +643,13 @@ footer{
     background-repeat:no-repeat;
     background-position:top left;
   }
-  /* Figma: cast=355.46×237, 17.1%/56.4% in 1920×941, scaleMode:FILL/cover */
+  /* Figma: cast=355.46×237 node 39:575 DATA_12 1 — wooden mold top view (4096×2731) */
   .imono-img-cast{
     position:absolute;
     left:17.1%;top:56.4%;
     width:18.5%;height:25.2%;
     flex:none;
-    background-size:cover;
-    background-position:center;
+    background:url('assets/images/imono-cast-data12.png') center/cover no-repeat;
   }
   .imono-img-right{
     position:absolute;
@@ -665,7 +664,11 @@ footer{
     background-color:#031B34;
   }
   .s-features::before{display:none}
-  .feat-deco{display:none}/* #51: hide all deco elements (factory/small/bird overlays) */
+  /* PC: feat-deco visible per Figma (nodes 39:622/624/626) — low opacity overlays */
+  .feat-deco{display:block}
+  .feat-deco .fd-factory{left:3%;top:15.9%;width:27.1%;height:22.3%}
+  .feat-deco .fd-small{left:84.5%;top:66.8%;right:auto;bottom:auto;width:12%}
+  .feat-deco .fd-bird{left:86%;top:13.1%;right:auto;width:4.7%}
   /* #27: container centered within full-width navy background */
   .feat-heading{font-size:clamp(36px,3.33vw,64px);max-width:1326px;margin:0 auto 60px;width:100%}
   .feat-list{max-width:1326px;width:100%;margin:0 auto}
