@@ -14,25 +14,19 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Set up SSH key
-        run: |
-          mkdir -p ~/.ssh
-          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
-          chmod 600 ~/.ssh/id_rsa
-          ssh-keyscan -H ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts 2>/dev/null
-
-      - name: Prepare staging directory
+      - name: Diagnose server permissions
         uses: appleboy/ssh-action@v1
         with:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
-            rm -rf /var/www/goidou-staging/HP_proposal
-            mkdir -p /var/www/goidou-staging/HP_proposal/assets/images
-
-      - name: Deploy via rsync
-        run: |
-          rsync -az \
-            goidou/HP_proposal/ \
-            ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/var/www/goidou-staging/HP_proposal/
+            echo "=== USER ==="
+            whoami
+            echo "=== /var/www/goidou-staging/ ==="
+            ls -la /var/www/ | grep goidou
+            ls -la /var/www/goidou-staging/ 2>/dev/null || echo "goidou-staging does not exist or not accessible"
+            echo "=== HP_proposal dir ==="
+            ls -la /var/www/goidou-staging/HP_proposal/ 2>/dev/null | head -5 || echo "HP_proposal does not exist"
+            echo "=== sudo check ==="
+            sudo -n true 2>/dev/null && echo "sudo available" || echo "sudo NOT available"
