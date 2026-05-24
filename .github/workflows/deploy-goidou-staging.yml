@@ -21,8 +21,18 @@ jobs:
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan -H ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts 2>/dev/null
 
+      - name: Prepare staging directory
+        uses: appleboy/ssh-action@v1
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            rm -rf /var/www/goidou-staging/HP_proposal
+            mkdir -p /var/www/goidou-staging/HP_proposal/assets/images
+
       - name: Deploy via rsync
         run: |
-          rsync -az --delete \
+          rsync -az \
             goidou/HP_proposal/ \
             ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/var/www/goidou-staging/HP_proposal/
