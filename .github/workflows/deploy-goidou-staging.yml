@@ -1,0 +1,30 @@
+name: Deploy Goidou HP Proposal to Staging
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'goidou/**'
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Deploy to staging via rsync
+        uses: appleboy/ssh-action@v1
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            mkdir -p /var/www/goidou-staging/HP_proposal/assets/images
+            cd /tmp
+            rm -rf goidou-deploy-tmp
+            git clone --depth=1 https://github.com/gdp-uno/gdesign-partners.git goidou-deploy-tmp
+            rsync -az --delete goidou-deploy-tmp/goidou/HP_proposal/ /var/www/goidou-staging/HP_proposal/
+            rm -rf goidou-deploy-tmp
+            echo "Deployed goidou HP_proposal to staging"
