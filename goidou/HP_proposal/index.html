@@ -12,7 +12,8 @@
   --ecru:#F8F5EE;
   --hero-bg:#FFF9F4;
   --outer-space:#2B3A35;
-  --slate-gray:#7A8A92;
+  --slate-gray:#7C8E97;/* Figma: Regent Gray */
+  --zorba:#9F9A8B;/* Figma: Zorba */
   --fuscous-gray:#554E47;
   --dawn-pink:#EAD8CF;
   --raw-sienna:#D68344;
@@ -108,12 +109,16 @@ header{
   writing-mode:vertical-rl;text-orientation:mixed;
   font-family:'Noto Serif JP',serif;font-weight:400;font-size:7.4px;
   color:var(--white);line-height:1.64;letter-spacing:.05em;
-  height:199px;overflow:hidden;
+  /* #23/#29: align top — each column starts from the same top edge */
+  align-self:flex-start;
 }
 .stmt-label-group{
   display:flex;flex-direction:column;align-items:center;gap:4px;
   height:43px;justify-content:flex-end;
-  margin-top:156px;
+  /* #23/#29: align top — label group also starts at top */
+  align-self:flex-start;
+  margin-top:0;
+  padding-top:156px;
 }
 .stmt-label-text{
   font-family:'Noto Serif JP',serif;font-weight:400;font-size:5.1px;
@@ -124,9 +129,12 @@ header{
 }
 
 /* ── PHOTO BAND ── */
+/* #30: no gap between band and imono — margin/padding zero at bottom */
 .s-band{
   width:100%;height:239px;position:relative;overflow:hidden;
   margin-top:-100px;z-index:2;
+  margin-bottom:0;padding-bottom:0;
+  display:block;/* ensure no inline-block gap */
 }
 .s-band .band-bg{
   position:absolute;left:0;top:0;right:0;bottom:0;
@@ -148,10 +156,12 @@ header{
 }
 
 /* ── 五位堂工業の鋳物 ── */
+/* #30: ensure seamless connection from band — no top margin/padding gap */
 .s-imono{
   width:100%;
   background:var(--outer-space);
   padding:23px 0 50px;
+  margin-top:0;
 }
 .imono-heading{
   display:flex;align-items:center;justify-content:center;
@@ -183,9 +193,9 @@ header{
   display:flex;gap:10px;padding:0 20px;margin-top:19px;
   height:170px;
 }
+/* #26/#31: left image — pure bg image, no extra padding */
 .imono-img-left{
-  display:flex;flex-direction:column;gap:35px;padding:25px 14px;
-  flex:1;
+  flex:1;min-width:0;
   background:url('assets/images/imono-left-frame.png') center/cover;
 }
 .imono-img-right{
@@ -194,41 +204,54 @@ header{
 }
 
 /* ── 3つの特徴 ── */
+/* #27/#32: navy background as per Figma (#031B34) */
 .s-features{
   width:100%;position:relative;
   padding:50px 20px;
-  background:url('assets/images/feat-bg-222aed.png') center/cover;
+  background-color:#031B34;
+  background-image:url('assets/images/feat-bg-222aed.png');
+  background-size:cover;
+  background-position:center;
 }
 .s-features::after{
   content:'';position:absolute;inset:0;
-  background:rgba(8,29,77,.5);pointer-events:none;
+  background:rgba(3,27,52,.55);pointer-events:none;
 }
 .s-features *{position:relative;z-index:1}
+/* #27/#32: ink deco — override position to absolute, below content */
 .feat-deco{
-  position:absolute;z-index:1;top:14px;left:11px;right:0;bottom:0;
+  position:absolute!important;z-index:0!important;inset:0;
   pointer-events:none;
 }
 .feat-deco .fd-factory{
-  position:absolute;left:0;top:0;width:97px;height:38px;
+  position:absolute!important;z-index:0!important;left:3%;top:16%;width:27%;height:22%;
   background:url('assets/images/stmt-factory-wide-79f1a6.png') center/contain no-repeat;
-  opacity:.4;
+  opacity:.25;mix-blend-mode:screen;
 }
 .feat-deco .fd-small{
-  position:absolute;right:63px;bottom:65px;width:63px;height:66px;
+  position:absolute!important;z-index:0!important;right:8%;bottom:8%;width:12%;
+  aspect-ratio:231/241;
   background:url('assets/images/col-small-56586a.png') center/cover;
-  opacity:.4;
+  opacity:.2;mix-blend-mode:screen;
 }
 .feat-deco .fd-bird{
-  position:absolute;right:32px;top:17px;width:33px;height:37px;
+  position:absolute!important;z-index:0!important;right:6%;top:13%;width:5%;
+  aspect-ratio:91/105;
   background:url('assets/images/bird-small-64673e.png') center/contain no-repeat;
-  opacity:.4;
+  opacity:.25;mix-blend-mode:screen;
 }
+/* #27: heading and list centered as container, text left-aligned */
 .feat-heading{
   font-family:'Noto Serif JP',serif;font-weight:400;font-size:22px;
   line-height:35.2px;color:var(--white);margin-bottom:30px;
 }
 .feat-list{
   display:flex;flex-direction:column;gap:11px;
+}
+/* Mobile features content wrapper center */
+.s-features>.feat-heading,
+.s-features>.feat-list{
+  position:relative;z-index:1;
 }
 .feat-item{
   display:flex;align-items:center;justify-content:space-between;
@@ -239,12 +262,18 @@ header{
   font-family:'Noto Serif JP',serif;font-weight:400;font-size:11px;
   line-height:24px;color:var(--white);
 }
+/* #32: arrow as › character */
 .feat-item-arrow{
-  flex-shrink:0;width:21px;height:10px;
+  flex-shrink:0;
   display:flex;align-items:center;
+  font-family:'Inter',sans-serif;font-size:20px;
+  color:var(--white);line-height:1;
 }
-.feat-item-arrow svg{width:21px;height:10px}
 .feat-item-desc{display:none}
+
+/* ── PC HERO COLLAGE ELEMENTS (hidden on mobile) ── */
+/* #22: these elements form the PC hero collage (product photos + ink splashes) */
+.h-pc-prod-right,.h-pc-ink-left,.h-pc-prod-left,.h-pc-ink-small,.h-pc-badge-pc,.h-pc-paper{display:none}
 
 /* ── PC HERO ELEMENTS (hidden on mobile) ── */
 .h-pc-mountain,.h-pc-text-area,.h-pc-lower{display:none}
@@ -285,7 +314,8 @@ header{
   padding:20px;border-top:1px solid rgba(255,255,255,.2);
 }
 .prod-row-1{background:var(--slate-gray)}
-.prod-row-2{background:var(--fuscous-gray)}
+/* #27: product row 2 uses Zorba from Figma */
+.prod-row-2{background:var(--zorba)}
 .prod-row-3{background:var(--dawn-pink)}
 .prod-row-4{background:var(--slate-gray)}
 .prod-meta{display:flex;flex-direction:column;gap:3px}
@@ -486,6 +516,43 @@ footer{
   /* Statement / Band: merged into PC hero, hide standalone sections */
   .s-statement,.s-band{display:none}
 
+  /* #22: PC hero collage elements — product photos, ink splashes, badge */
+  .h-pc-prod-right{
+    display:block;position:absolute;
+    left:52.7%;top:28%;width:20.5%;height:auto;aspect-ratio:393/611;
+    background:url('assets/images/prod-row1-img-56586a.png') center/cover;
+    z-index:1;
+  }
+  .h-pc-prod-left{
+    display:block;position:absolute;
+    left:23.8%;top:60.5%;width:20.7%;height:auto;aspect-ratio:397/265;
+    background:url('assets/images/stmt-product-img-4f091d.png') center/cover;
+    z-index:1;
+  }
+  .h-pc-ink-left{
+    display:block;position:absolute;
+    left:4%;top:73%;width:35.8%;height:auto;aspect-ratio:688/290;
+    background:url('assets/images/info-ink-56586a.png') center/contain no-repeat;
+    z-index:1;opacity:.85;
+  }
+  .h-pc-ink-small{
+    display:block;position:absolute;
+    left:67%;top:16.7%;width:12%;height:auto;aspect-ratio:231/241;
+    background:url('assets/images/col-small-56586a.png') center/cover;
+    z-index:1;opacity:.85;
+  }
+  .h-pc-badge-pc{
+    display:block;position:absolute;
+    left:68.5%;top:81.5%;width:5.6%;height:auto;aspect-ratio:107/160;
+    background:url('assets/images/badge-100nen.png') center/contain no-repeat;
+    z-index:3;
+  }
+  .h-pc-paper{
+    display:block;position:absolute;inset:0;
+    background:url('assets/images/paper-texture.png') center/cover;
+    opacity:.15;pointer-events:none;z-index:1;
+  }
+
   /* Mountain background: fills full hero */
   .h-pc-mountain{
     display:block;position:absolute;inset:0;
@@ -493,10 +560,11 @@ footer{
     z-index:0;
   }
   /* Vertical text area: centered horizontally, top 20% of hero */
+  /* #23: align-items:flex-start so all 3 columns share the same top edge */
   .h-pc-text-area{
-    display:flex;flex-direction:row;align-items:flex-end;gap:16px;
+    display:flex;flex-direction:row;align-items:flex-start;gap:16px;
     position:absolute;top:20%;left:50%;transform:translateX(-50%);
-    z-index:2;
+    z-index:5;/* above collage images and paper */
   }
   .h-pc-col{
     writing-mode:vertical-rl;text-orientation:mixed;
@@ -513,11 +581,17 @@ footer{
   }
   .h-pc-stmt-line{width:.3px;height:20px;background:rgba(255,255,255,.8)}
   /* Forest silhouette + collage: bottom of hero */
+  /* #24: forest lower section — z-index 4 to show above collage items but below text */
   .h-pc-lower{
     display:block;position:absolute;bottom:0;left:0;right:0;
-    height:clamp(180px,34vw,650px);overflow:hidden;z-index:1;
+    height:clamp(180px,34vw,650px);overflow:hidden;z-index:4;
   }
-  .h-pc-forest{position:absolute;inset:0;background:url('assets/images/stmt-lower-bg-173ece.png') center/cover}
+  /* #24: forest silhouette background — ensure it fills the lower container */
+  .h-pc-forest{
+    position:absolute;inset:0;
+    background:url('assets/images/stmt-lower-bg-173ece.png') center bottom/cover;
+    background-color:#1a2e1a;/* fallback dark green if image fails */
+  }
   /* Factory fire image: x:1324/1920=68.96%, y:80/650=12.3%, w:521/1920=27.1%, h:205/650=31.5% */
   .h-pc-fire{
     position:absolute;left:68.96%;top:12.3%;
@@ -533,8 +607,9 @@ footer{
 
   /* ── Imono ── */
   .s-imono{padding:clamp(60px,8.75vw,168px) 0}
-  .imono-heading{height:auto;padding:0 60px 40px;justify-content:flex-start}
-  .imono-heading h2{font-size:clamp(36px,3.33vw,64px);text-align:left}
+  /* #25: center the 「五位堂工業の鋳物」 heading */
+  .imono-heading{height:auto;padding:0 60px 40px;justify-content:center}
+  .imono-heading h2{font-size:clamp(36px,3.33vw,64px);text-align:center}
   .imono-main-img{aspect-ratio:auto;height:clamp(280px,28vw,480px)}
   .imono-text{
     max-width:1200px;margin:0 auto;
@@ -548,12 +623,14 @@ footer{
     height:clamp(200px,22vw,360px);
   }
 
-  /* ── Features: PC has large title + description in row layout ── */
+  /* ── Features: PC — navy bg, centered content, left-aligned text ── */
+  /* #27: background-color is already set to #031B34 globally; ensure padding */
   .s-features{padding:clamp(80px,6.25vw,120px) 60px clamp(100px,8.9vw,171px)}
-  .feat-deco .fd-small{right:120px}
-  .feat-deco .fd-bird{right:80px}
-  .feat-heading{font-size:clamp(36px,3.33vw,64px);max-width:1326px;margin-bottom:60px}
-  .feat-list{max-width:1326px}
+  .feat-deco .fd-small{right:8%}
+  .feat-deco .fd-bird{right:6%}
+  /* #27: container centered within full-width navy background */
+  .feat-heading{font-size:clamp(36px,3.33vw,64px);max-width:1326px;margin:0 auto 60px;width:100%}
+  .feat-list{max-width:1326px;width:100%;margin:0 auto}
   .feat-item{
     flex-direction:row;align-items:flex-start;
     padding:28px 0;border-bottom:1px solid rgba(255,255,255,.15);
@@ -608,10 +685,18 @@ footer{
   .contact-form{max-width:600px;width:100%;margin:0 auto}
   .form-input{font-size:15px}
 
-  /* ── Info ── */
+  /* ── Info ── #28: full-width ecru background, inner content centered */
   .s-info{
-    max-width:900px;margin:0 auto;
+    width:100%;
+    background:var(--ecru);
     padding:0 60px 60px;
+    max-width:none;margin:0;
+    align-items:center;
+  }
+  .s-info>.info-h2,
+  .s-info>.info-list,
+  .s-info>.info-more{
+    width:100%;max-width:900px;
   }
   .info-h2{font-size:clamp(16px,1.4vw,22px)}
   .info-date,.info-title{font-size:clamp(12px,0.9vw,14px)}
@@ -732,6 +817,13 @@ footer{
   <div class="h-badge"></div>
   <!-- PC: mountain bg + vertical text + forest collage -->
   <div class="h-pc-mountain"></div>
+  <!-- #22: PC collage elements — product photos, ink splashes, badge, paper texture -->
+  <div class="h-pc-prod-right" aria-hidden="true"></div>
+  <div class="h-pc-prod-left" aria-hidden="true"></div>
+  <div class="h-pc-ink-left" aria-hidden="true"></div>
+  <div class="h-pc-ink-small" aria-hidden="true"></div>
+  <div class="h-pc-badge-pc" aria-hidden="true"></div>
+  <div class="h-pc-paper" aria-hidden="true"></div>
   <div class="h-pc-text-area">
     <div class="h-pc-col">鋳造業界の未来を作る</div>
     <div class="h-pc-col">千年を超える伝統と最先端技術の融合で</div>
@@ -797,29 +889,18 @@ footer{
   <ul class="feat-list" style="list-style:none">
     <li class="feat-item">
       <span class="feat-item-text">ICタグによる<br>徹底した品質管理</span>
-      <span class="feat-item-arrow">
-        <svg viewBox="0 0 21 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M0 5H19M19 5L15 1.5M19 5L15 8.5" stroke="white" stroke-width="1"/>
-        </svg>
-      </span>
+      <!-- #32: arrow restored to › character -->
+      <span class="feat-item-arrow" aria-hidden="true">›</span>
       <p class="feat-item-desc">造型から注湯まで、製造に関わるほぼすべてのデータを ICタグで製品ごとに記録・管理しています。気温・湿度・溶湯成分・機械的性質まで製造番号一つで追跡可能な体制により、一般的に5〜10%とされる不良率に対し、弊社は約1%を実現しています。</p>
     </li>
     <li class="feat-item">
       <span class="feat-item-text">複雑形状への<br>高い対応力</span>
-      <span class="feat-item-arrow">
-        <svg viewBox="0 0 21 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M0 5H19M19 5L15 1.5M19 5L15 8.5" stroke="white" stroke-width="1"/>
-        </svg>
-      </span>
+      <span class="feat-item-arrow" aria-hidden="true">›</span>
       <p class="feat-item-desc">内部に水やオイルが縦横無尽に流れる船舶エンジン部品など、極めて難易度の高い複雑形状の鋳物にも対応可能です。不良が出やすいとされる案件も、安定して良品に仕上げる技術力がございます。</p>
     </li>
     <li class="feat-item">
       <span class="feat-item-text">30年の海外調達経験による<br>最適な提案力</span>
-      <span class="feat-item-arrow">
-        <svg viewBox="0 0 21 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M0 5H19M19 5L15 1.5M19 5L15 8.5" stroke="white" stroke-width="1"/>
-        </svg>
-      </span>
+      <span class="feat-item-arrow" aria-hidden="true">›</span>
       <p class="feat-item-desc">国内での自社製造に加え、1990年代から約30年にわたり構築してきた中国をはじめとする海外調達ルートを活用し、機密性の高い重要部品は国内で高品質に、コストダウンが求められる製品は海外調達で対応するなど、最適な供給方法をご提案します。</p>
     </li>
   </ul>
