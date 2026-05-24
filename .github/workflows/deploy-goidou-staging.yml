@@ -14,19 +14,18 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Diagnose server permissions
+      - name: Read nginx config and find writable paths
         uses: appleboy/ssh-action@v1
         with:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
-            echo "=== USER ==="
-            whoami
-            echo "=== /var/www/goidou-staging/ ==="
-            ls -la /var/www/ | grep goidou
-            ls -la /var/www/goidou-staging/ 2>/dev/null || echo "goidou-staging does not exist or not accessible"
-            echo "=== HP_proposal dir ==="
-            ls -la /var/www/goidou-staging/HP_proposal/ 2>/dev/null | head -5 || echo "HP_proposal does not exist"
-            echo "=== sudo check ==="
-            sudo -n true 2>/dev/null && echo "sudo available" || echo "sudo NOT available"
+            echo "=== nginx sites-enabled ==="
+            cat /etc/nginx/sites-enabled/* 2>/dev/null || cat /etc/nginx/conf.d/* 2>/dev/null
+            echo "=== home dir ==="
+            echo $HOME
+            ls -la $HOME/
+            echo "=== writable test ==="
+            touch $HOME/test-write 2>/dev/null && echo "HOME writable" && rm $HOME/test-write
+            touch /var/www/company-lp/staging/test-write 2>/dev/null && echo "company-lp writable" && rm /var/www/company-lp/staging/test-write
