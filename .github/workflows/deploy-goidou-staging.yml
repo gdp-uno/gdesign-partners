@@ -14,18 +14,15 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Read nginx config and find writable paths
-        uses: appleboy/ssh-action@v1
-        with:
-          host: ${{ secrets.SSH_HOST }}
-          username: ${{ secrets.SSH_USER }}
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          script: |
-            echo "=== nginx sites-enabled ==="
-            cat /etc/nginx/sites-enabled/* 2>/dev/null || cat /etc/nginx/conf.d/* 2>/dev/null
-            echo "=== home dir ==="
-            echo $HOME
-            ls -la $HOME/
-            echo "=== writable test ==="
-            touch $HOME/test-write 2>/dev/null && echo "HOME writable" && rm $HOME/test-write
-            touch /var/www/company-lp/staging/test-write 2>/dev/null && echo "company-lp writable" && rm /var/www/company-lp/staging/test-write
+      - name: Setup SSH key
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan -H ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
+
+      - name: Deploy via rsync
+        run: |
+          rsync -avz --delete \
+            goidou/HP_proposal/ \
+            ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/var/www/goidou-staging/HP_proposal/
