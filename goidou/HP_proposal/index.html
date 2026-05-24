@@ -154,12 +154,11 @@ header{
 }
 
 /* ── 五位堂工業の鋳物 ── */
-/* #30: ensure seamless connection from band — no top margin/padding gap */
 .s-imono{
   width:100%;
   background:var(--outer-space);
   padding:23px 0 50px;
-  margin-top:0;
+  margin-top:-1px;/* subpixel gap fix between band and imono */
 }
 .imono-heading{
   display:flex;align-items:center;justify-content:center;
@@ -191,21 +190,26 @@ header{
   display:flex;gap:10px;padding:0 20px;margin-top:19px;
   height:170px;
 }
-/* #26/#31: left column — two images stacked (Figma node 69:514) */
+/* Figma node 69:511 — left column: 2 images fixed-size, stacked, gap:35px */
 .imono-img-left{
-  flex:0 0 32%;
-  display:flex;flex-direction:column;gap:8px;
+  flex:1;
+  display:flex;flex-direction:column;gap:35px;
+  padding:0 14px;
+  overflow:hidden;
 }
+/* Figma 69:512: 45×63px fixed */
 .imono-img-tall{
-  flex:1;
-  background:url('assets/images/stmt-tall-img-24cd84.png') center/cover;
+  width:45px;height:63px;flex-shrink:0;
+  background:url('assets/images/stmt-tall-img-24cd84.png') center/contain no-repeat;
 }
+/* Figma 69:510: 100×67px fixed */
 .imono-img-cast{
-  height:60px;flex-shrink:0;
-  background:url('assets/images/imono-left-frame.png') center/cover;
+  width:100px;height:67px;flex-shrink:0;
+  background:url('assets/images/imono-left-frame.png') center/contain no-repeat;
 }
+/* Figma 68:121: 230px wide, fill height */
 .imono-img-right{
-  flex:1;
+  flex:0 0 230px;
   background:url('assets/images/stmt-large-img-4d27b9.png') center top/cover;
 }
 
@@ -518,48 +522,44 @@ footer{
   .header-nav a:hover{opacity:.5;transition:opacity .2s}
   .header-nav .has-dd{display:flex;align-items:center;gap:4px}
 
-  /* ── Hero: PC Figma (1920×1254) — beige collage (Figma node 31:1212) ── */
+  /* ── Hero: PC beige collage (Figma node 31:1212) ── */
   .s-hero{
     aspect-ratio:auto;
     height:clamp(600px,65.3vw,1254px);
-    background-color:var(--hero-bg);/* #FFF9F4 — Figma: Bridal Heath */
+    background-color:var(--hero-bg);
   }
   .s-hero .paper-tex,.s-hero .h-fire,.s-hero .h-cast,.s-hero .h-brand,.s-hero .h-small,.s-hero .h-badge{display:none}
-  /* Statement / Band: mobile-only sections */
-  .s-statement,.s-band{display:none}
-  /* Mountain/text/forest elements: not in Figma PC design */
+  /* PC mountain elements: hidden in hero (used in statement section instead) */
   .h-pc-mountain,.h-pc-text-area,.h-pc-lower{display:none}
-
-  /* PC hero collage — Figma positions (% of 1920×1254) */
-  /* Fire/casting photo: x:1011,y:351,w:393,h:611 */
+  /* Fire/cast photo (Figma: x:1011,y:351,w:393,h:611 / 1920×1254) */
   .h-pc-prod-right{
     display:block;position:absolute;
     left:52.7%;top:28%;width:20.5%;height:auto;aspect-ratio:393/611;
     background:url('assets/images/col-fire.png') center/cover;
     z-index:1;
   }
-  /* Cast iron part: x:458,y:758,w:397,h:265 */
+  /* Cast iron part (Figma: x:458,y:758,w:397,h:265) */
   .h-pc-prod-left{
     display:block;position:absolute;
     left:23.8%;top:60.5%;width:20.7%;height:auto;aspect-ratio:397/265;
     background:url('assets/images/col-cast.png') center/cover;
     z-index:1;
   }
-  /* Ink splash bottom-left: x:77,y:916,w:688,h:290 */
+  /* Ink splash bottom-left (Figma: x:77,y:916,w:688,h:290) */
   .h-pc-ink-left{
     display:block;position:absolute;
     left:4%;top:73%;width:35.8%;height:auto;aspect-ratio:688/290;
     background:url('assets/images/info-ink-56586a.png') center/contain no-repeat;
     z-index:1;opacity:.9;
   }
-  /* Small ink top-right: x:1288,y:210,w:231,h:241 */
+  /* Small ink top-right (Figma: x:1288,y:210,w:231,h:241) */
   .h-pc-ink-small{
     display:block;position:absolute;
     left:67%;top:16.7%;width:12%;height:auto;aspect-ratio:231/241;
     background:url('assets/images/col-small-56586a.png') center/cover;
     z-index:1;opacity:.9;
   }
-  /* Badge: x:1316,y:1022,w:107,h:160 */
+  /* Badge (Figma: x:1316,y:1022,w:107,h:160) */
   .h-pc-badge-pc{
     display:block;position:absolute;
     left:68.5%;top:81.5%;width:5.6%;height:auto;aspect-ratio:107/160;
@@ -571,6 +571,35 @@ footer{
     display:block;position:absolute;inset:0;
     background:url('assets/images/paper-texture.png') center/cover;
     opacity:.3;pointer-events:none;z-index:3;
+  }
+
+  /* ── Statement: PC — mountain bg + vertical text (Figma node 31:1253 upper) ── */
+  .s-statement{
+    display:block;
+    height:clamp(400px,60vw,1150px);
+  }
+  .stmt-inner{
+    padding:clamp(60px,12vw,230px) 0 0;
+    gap:clamp(8px,1.2vw,24px);
+    justify-content:center;
+  }
+  .stmt-vert-col{
+    font-size:clamp(14px,1.4vw,26px);
+    line-height:1.5;
+    letter-spacing:.08em;
+  }
+  .stmt-label-group{
+    height:clamp(50px,5.5vw,100px);
+    gap:8px;
+  }
+  .stmt-label-text{font-size:clamp(9px,.7vw,13px)}
+  .stmt-label-line{height:clamp(24px,2.2vw,40px)}
+
+  /* ── Band: PC — forest silhouette (Figma node 31:1253 lower, y:799) ── */
+  .s-band{
+    display:block;
+    height:clamp(200px,34vw,650px);
+    margin-top:clamp(-300px,-18vw,-80px);
   }
 
   /* ── Imono ── */
@@ -590,8 +619,13 @@ footer{
     padding:24px 60px 0;
     height:clamp(200px,22vw,360px);
   }
+  /* PC: reset imono images to flex-fill layout */
+  .imono-img-left{flex:0 0 32%;padding:0;gap:8px}
+  .imono-img-tall{width:auto;height:auto;flex:1;background-size:cover}
+  .imono-img-cast{width:auto;height:clamp(60px,7vw,120px);flex-shrink:0;background-size:cover}
+  .imono-img-right{flex:1}
 
-  /* ── Features: PC Figma uses #031B34 (no texture) ── */
+  /* ── Features: PC — #031B34, no texture (Figma solid bg) ── */
   .s-features{
     padding:clamp(80px,6.25vw,120px) 60px clamp(100px,8.9vw,171px);
     background-color:#031B34;
@@ -696,7 +730,7 @@ footer{
   .footer-nav-item{font-size:9px}
   .footer-copyright{
     max-width:1200px;margin:0 auto;
-    padding:16px 60px;text-align:left;
+    padding:16px 60px;text-align:center;
     font-size:9px;
   }
 }
