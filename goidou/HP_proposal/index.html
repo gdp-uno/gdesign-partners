@@ -133,7 +133,6 @@ header{
   margin-top:-100px;z-index:2;
   margin-bottom:0;padding-bottom:0;
   display:block;
-  background-color:var(--outer-space);/* #45/#48: match imono bg, prevent color gap */
 }
 .s-band .band-bg{
   position:absolute;left:0;top:0;right:0;bottom:0;
@@ -606,7 +605,7 @@ footer{
     height:clamp(200px,34vw,650px);
     margin-top:clamp(-300px,-18vw,-80px);
   }
-  .s-band .band-lower{background-size:cover;background-position:bottom;}
+  .s-band .band-lower{display:none;}
 
   /* ── Imono ── */
   .s-imono{padding:clamp(30px,4.4vw,84px) 0}/* #49: halve top space above heading */
