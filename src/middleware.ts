@@ -1,12 +1,22 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
-const ENABLED = process.env.BASIC_AUTH_ENABLED === "true";
+const BASIC_AUTH_ENABLED = process.env.BASIC_AUTH_ENABLED === "true";
+const STAGING_MODE = process.env.STAGING_MODE === "true";
 const USER = "gdp2026";
 const PASS = "gdp2026";
 
+const STAGING_BLOCKED = ["/lp/indie-label", "/lp/productphoto"];
+
 export function middleware(req: NextRequest) {
-  if (!ENABLED) return NextResponse.next();
+  if (STAGING_MODE) {
+    const path = req.nextUrl.pathname;
+    if (STAGING_BLOCKED.some((p) => path === p || path.startsWith(p + "/"))) {
+      return new NextResponse(null, { status: 404 });
+    }
+  }
+
+  if (!BASIC_AUTH_ENABLED) return NextResponse.next();
 
   const auth = req.headers.get("authorization");
   if (auth?.startsWith("Basic ")) {
