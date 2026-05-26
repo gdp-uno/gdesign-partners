@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ログイン — 五位堂工業HP提案</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{
+  min-height:100vh;display:flex;align-items:center;justify-content:center;
+  background:#F8F5EE;font-family:'Noto Serif JP',serif;
+}
+.card{
+  background:#fff;border-radius:4px;padding:48px 40px;
+  width:100%;max-width:400px;box-shadow:0 2px 16px rgba(0,0,0,.08);
+}
+.logo{
+  text-align:center;margin-bottom:32px;
+  font-size:13px;letter-spacing:.1em;color:#7A8A92;
+}
+.logo strong{display:block;font-size:18px;color:#2B3A35;letter-spacing:.05em;margin-bottom:4px;}
+label{display:block;font-size:12px;letter-spacing:.08em;color:#554E47;margin-bottom:6px;}
+input{
+  width:100%;padding:10px 14px;border:1px solid #D0CCBF;border-radius:3px;
+  font-size:14px;color:#333;outline:none;margin-bottom:20px;
+  transition:border-color .2s;
+}
+input:focus{border-color:#2B3A35;}
+button{
+  width:100%;padding:12px;background:#2B3A35;color:#fff;
+  border:none;border-radius:3px;font-size:14px;letter-spacing:.08em;
+  cursor:pointer;transition:opacity .2s;
+}
+button:hover{opacity:.85;}
+.error{
+  display:none;margin-bottom:16px;padding:10px 14px;
+  background:#FFF0EE;border:1px solid #e9a090;border-radius:3px;
+  font-size:13px;color:#c0392b;
+}
+</style>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+<div class="card">
+  <div class="logo">
+    <strong>Growth Design Partners</strong>
+    五位堂工業様 HP提案
+  </div>
+  <div class="error" id="err">メールアドレスまたはパスワードが正しくありません。</div>
+  <form id="form">
+    <label for="email">メールアドレス</label>
+    <input type="email" id="email" placeholder="example@company.jp" required autocomplete="email">
+    <label for="password">パスワード</label>
+    <input type="password" id="password" required autocomplete="current-password">
+    <button type="submit">ログイン</button>
+  </form>
+</div>
+<script>
+const ALLOWED = [
+  'uno@gdesign-partners.co.jp',
+  'abe@gdesign-partners.co.jp',
+  'iehito.tsuda@goidou.jp'
+];
+const PASSWORD = 'GoidouHP_Proposal';
+
+document.getElementById('form').addEventListener('submit', function(e){
+  e.preventDefault();
+  const email = document.getElementById('email').value.trim().toLowerCase();
+  const pass  = document.getElementById('password').value;
+  const err   = document.getElementById('err');
+  if(ALLOWED.includes(email) && pass === PASSWORD){
+    sessionStorage.setItem('gdp_auth','1');
+    location.replace('index.html');
+  } else {
+    err.style.display = 'block';
+  }
+});
+</script>
+</body>
+</html>
