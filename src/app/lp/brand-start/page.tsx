@@ -348,7 +348,7 @@ function WhyUs() {
             <ul className="space-y-4">
               {strengths.map((s) => (
                 <li key={s.n} className="flex items-start gap-3">
-                  <span className="shrink-0 font-black text-[#fbbf24] text-[14px] w-5">{s.n}</span>
+                  <span className="shrink-0 font-black text-[#fbbf24] text-[14px] w-5 mt-[3px]">{s.n}</span>
                   <div>
                     <span className="font-bold text-white text-[14px]">{s.title}</span>
                     <p className="text-[12.5px] text-white/70 leading-[1.7] mt-0.5">{s.desc}</p>
