@@ -152,13 +152,13 @@ function Problem() {
     <section id="problem" className="relative py-16 sm:py-24 bg-white">
       <div className="max-w-[1280px] mx-auto px-4 sm:px-8">
         <Kicker jp="お悩み" en="PROBLEM" color="#dc2626" />
-        <SectionTitle>価格競争から抜け出せない。<Highlight color="#fecaca">その本当の原因</Highlight>は？</SectionTitle>
+        <SectionTitle>価格競争から抜け出せない。<span className="inline-block"><Highlight color="#fecaca">その本当の原因</Highlight>は？</span></SectionTitle>
         <p className="text-center text-[14px] sm:text-[15px] text-[#475569] mt-5 leading-[2] max-w-2xl mx-auto">
           技術力も対応力も十分なのに「なぜ選ばれないのか」。<br className="hidden sm:block" />その答えは、ブランドの設計にあります。
         </p>
-        <div className="mt-12 grid md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
+        <div className="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-4 sm:gap-5">
           {PROBLEMS.map((p, i) => (
-            <div key={i} className={`relative bg-[#f8fafc] border-2 border-[#e2e8f0] hover:border-[#15447b] hover:bg-white transition-all rounded-2xl p-6 group ${i === 4 ? "md:col-span-2 lg:col-span-3 lg:max-w-xl lg:mx-auto" : ""}`}>
+            <div key={i} className={`relative bg-[#f8fafc] border-2 border-[#e2e8f0] hover:border-[#15447b] hover:bg-white transition-all rounded-2xl p-6 group lg:col-span-2 ${i === 3 ? "lg:col-start-2" : ""} ${i === 4 ? "md:col-span-2 md:max-w-md md:mx-auto lg:col-start-4 lg:max-w-none lg:mx-0" : ""}`}>
               <div className="absolute -top-3 -left-3 w-9 h-9 bg-gradient-to-br from-[#15447b] to-[#0a1f3d] text-white rounded-full flex items-center justify-center font-mono font-black text-[14px] shadow-md">{String(i + 1).padStart(2, "0")}</div>
               <div className="flex items-start gap-4 pl-3">
                 <div className="w-12 h-12 bg-[#fef2f2] border border-[#fecaca] rounded-xl flex items-center justify-center text-[#dc2626] shrink-0"><Ico d={p.icon} size={22} /></div>
@@ -229,7 +229,7 @@ function WhyUs() {
     <section id="why" className="relative py-16 sm:py-24 bg-white">
       <div className="max-w-[1280px] mx-auto px-4 sm:px-8">
         <Kicker jp="選ばれる理由" en="WHY US" color="#15447b" />
-        <SectionTitle>単なるリニューアルでなく、<Highlight>「選ばれる仕組み」</Highlight>を作ります</SectionTitle>
+        <SectionTitle>単なるリニューアルでなく、<span className="inline-block"><Highlight>「選ばれる仕組み」</Highlight></span><span className="inline-block">を作ります</span></SectionTitle>
         <div className="mt-12 grid md:grid-cols-2 gap-5">
           <div className="bg-[#f8fafc] border-2 border-[#e2e8f0] rounded-2xl p-7 sm:p-8">
             <div className="flex items-center gap-3 mb-6"><div className="w-10 h-10 bg-[#e2e8f0] rounded-full flex items-center justify-center"><Ico d={I.x} size={18} className="text-[#64748b]" /></div><h3 className="font-bold text-[#475569] text-[17px]">よくある「見た目だけ」のリニューアル</h3></div>
@@ -244,7 +244,7 @@ function WhyUs() {
             <ul className="space-y-4">
               {strengths.map((s) => (
                 <li key={s.n} className="flex items-start gap-3">
-                  <span className="shrink-0 font-black text-[#fbbf24] text-[14px] leading-none mt-0.5 w-5">{s.n}</span>
+                  <span className="shrink-0 font-black text-[#fbbf24] text-[14px] w-5">{s.n}</span>
                   <div><span className="font-bold text-white text-[14px]">{s.title}</span><p className="text-[12.5px] text-white/70 leading-[1.7] mt-0.5">{s.desc}</p></div>
                 </li>
               ))}
