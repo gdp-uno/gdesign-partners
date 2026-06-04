@@ -82,10 +82,10 @@ function FV() {
             <Ico d={I.bolt} size={14} className="text-[#fbbf24] fill-[#fbbf24]" />
             <span className="font-bold text-[12px] sm:text-[13px] text-[#15447b]">起業準備中・創業直後の方へ</span>
           </div>
-          <h1 className="font-black text-[#0a1f3d] leading-[1.3] tracking-[-0.01em] text-[22px] sm:text-[38px] lg:text-[42px] mb-5">
-            3社への問い合わせで<br />
-            <Highlight color="#fbbf24">疲れたなら</Highlight>、<br />
-            今すぐここで完結させましょう。
+          <h1 className="font-black text-[#0a1f3d] leading-[1.3] tracking-[-0.01em] text-[20px] sm:text-[38px] lg:text-[42px] mb-5 [text-wrap:balance]">
+            <span className="inline-block">3社への問い合わせで</span>
+            <span className="inline-block"><Highlight color="#fbbf24">疲れたなら</Highlight>、</span>
+            <span className="inline-block">今すぐここで完結させましょう。</span>
           </h1>
           <p className="text-[15px] sm:text-[16px] text-[#475569] leading-[1.9] mb-8">
             ロゴ・名刺・HP・営業資料まで、<strong className="text-[#0a1f3d]">1社・4週間</strong>でブランドをまるごと整えます。<br />
