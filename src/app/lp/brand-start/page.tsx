@@ -317,7 +317,9 @@ function WhyUs() {
       <div className="max-w-[1280px] mx-auto px-4 sm:px-8">
         <Kicker jp="選ばれる理由" en="WHY US" color="#15447b" />
         <SectionTitle>
-          なぜ、<Highlight>Growth Design Partners</Highlight><span className="inline-block">が選ばれるのか</span>
+          <span className="block">なぜ、</span>
+          <span className="block"><Highlight>Growth Design Partners</Highlight></span>
+          <span className="block">が選ばれるのか</span>
         </SectionTitle>
         <div className="mt-12 grid md:grid-cols-2 gap-5">
           <div className="bg-[#f8fafc] border-2 border-[#e2e8f0] rounded-2xl p-7 sm:p-8">
