@@ -502,7 +502,7 @@ const FAQS = [
 ];
 
 function FAQ() {
-  const [open, setOpen] = useState(0);
+  const [open, setOpen] = useState<Set<number>>(new Set([0]));
   return (
     <section id="faq" className="relative py-16 sm:py-24 bg-gradient-to-b from-[#f0f6fc] to-[#e0f2fe]">
       <div className="max-w-[900px] mx-auto px-4 sm:px-8">
@@ -510,10 +510,10 @@ function FAQ() {
         <SectionTitle>気になる<Highlight>ご質問</Highlight></SectionTitle>
         <div className="mt-10 space-y-3">
           {FAQS.map((f, i) => {
-            const isOpen = open === i;
+            const isOpen = open.has(i);
             return (
               <div key={i} className={`bg-white rounded-2xl border-2 transition-all ${isOpen ? "border-[#15447b] shadow-lg" : "border-[#e2e8f0] hover:border-[#15447b]/40"}`}>
-                <button onClick={() => setOpen(isOpen ? -1 : i)} className="w-full text-left flex items-start justify-between gap-4 p-5 sm:p-6">
+                <button onClick={() => setOpen(prev => { const next = new Set(prev); if (next.has(i)) next.delete(i); else next.add(i); return next; })} className="w-full text-left flex items-start justify-between gap-4 p-5 sm:p-6">
                   <div className="flex items-start gap-4 flex-1">
                     <span className="shrink-0 w-9 h-9 bg-[#dc2626] text-white rounded-full flex items-center justify-center font-black text-[14px]">Q</span>
                     <span className="font-bold text-[#0a1f3d] text-[15px] sm:text-[16px] leading-[1.6] pt-1">{f.q}</span>
