@@ -58,10 +58,11 @@ function FV() {
             <Ico d={I.heart} size={14} className="text-[#a855f7] fill-[#a855f7]" />
             <span className="font-bold text-[12px] sm:text-[13px] text-[#15447b]">理念はあるが言語化できていない方へ</span>
           </div>
-          <h1 className="font-black text-[#0a1f3d] leading-[1.3] tracking-[-0.01em] text-[20px] sm:text-[38px] lg:text-[42px] mb-5">
-            頭の中にある熱い想いを、<br />
-            ターゲットに届く<br />
-            <Highlight color="#e9d5ff">ブランドストーリー</Highlight>に翻訳します。
+          <h1 className="font-black text-[#0a1f3d] leading-[1.3] tracking-[-0.01em] text-[20px] sm:text-[38px] lg:text-[42px] mb-5 [text-wrap:balance]">
+            <span className="inline-block">頭の中にある熱い想いを、</span>
+            <span className="inline-block">ターゲットに届く</span>
+            <span className="inline-block"><Highlight color="#e9d5ff">ブランドストーリー</Highlight></span>
+            <span className="inline-block">に翻訳します。</span>
           </h1>
           <p className="text-[15px] sm:text-[16px] text-[#475569] leading-[1.9] mb-8">
             MVV策定から始める、想いが伝わるブランドを一緒につくります。<br className="hidden sm:block" />
@@ -153,13 +154,13 @@ function Problem() {
     <section id="problem" className="relative py-16 sm:py-24 bg-white">
       <div className="max-w-[1280px] mx-auto px-4 sm:px-8">
         <Kicker jp="お悩み" en="PROBLEM" color="#dc2626" />
-        <SectionTitle>想いはある。でも<Highlight color="#fecaca">言葉にならない</Highlight>のはなぜか？</SectionTitle>
+        <SectionTitle>想いはある。でも<span className="inline-block"><Highlight color="#fecaca">言葉にならない</Highlight></span><span className="inline-block">のはなぜか？</span></SectionTitle>
         <p className="text-center text-[14px] sm:text-[15px] text-[#475569] mt-5 leading-[2] max-w-2xl mx-auto">
           ブランディングで一番難しいのは「自分ごと」の言語化です。<br className="hidden sm:block" />近すぎて見えない、を一緒に解決します。
         </p>
-        <div className="mt-12 grid md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
+        <div className="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-4 sm:gap-5">
           {PROBLEMS.map((p, i) => (
-            <div key={i} className={`relative bg-[#f8fafc] border-2 border-[#e2e8f0] hover:border-[#15447b] hover:bg-white transition-all rounded-2xl p-6 group ${i === 4 ? "md:col-span-2 lg:col-span-3 lg:max-w-xl lg:mx-auto" : ""}`}>
+            <div key={i} className={`relative bg-[#f8fafc] border-2 border-[#e2e8f0] hover:border-[#15447b] hover:bg-white transition-all rounded-2xl p-6 group lg:col-span-2 ${i === 3 ? "lg:col-start-2" : ""} ${i === 4 ? "md:col-span-2 md:max-w-md md:mx-auto lg:col-start-4 lg:max-w-none lg:mx-0" : ""}`}>
               <div className="absolute -top-3 -left-3 w-9 h-9 bg-gradient-to-br from-[#15447b] to-[#0a1f3d] text-white rounded-full flex items-center justify-center font-mono font-black text-[14px] shadow-md">{String(i + 1).padStart(2, "0")}</div>
               <div className="flex items-start gap-4 pl-3">
                 <div className="w-12 h-12 bg-[#fdf4ff] border border-[#e9d5ff] rounded-xl flex items-center justify-center text-[#7c3aed] shrink-0"><Ico d={p.icon} size={22} /></div>
@@ -172,9 +173,9 @@ function Problem() {
           <div className="font-mono text-[10px] tracking-[0.3em] text-[#fbbf24] mb-3 font-bold">INSIGHT</div>
           <p className="text-white font-bold text-[18px] sm:text-[20px] leading-[1.6] mb-4">想いの言語化は「見つける」作業ではなく、「翻訳する」作業です。</p>
           <ul className="space-y-3 text-[13px] text-white/80 leading-[1.85]">
-            <li className="flex items-start gap-2"><span className="text-[#fbbf24] shrink-0 mt-1">▸</span><span>ブランドの核になる「想い」はすでにあなたの中に存在している。それを第三者の視点で引き出し、ターゲットが理解できる言葉に翻訳するのが専門家の仕事</span></li>
-            <li className="flex items-start gap-2"><span className="text-[#fbbf24] shrink-0 mt-1">▸</span><span>MVVが空虚になる理由の9割は「フレームワーク先行」。まず経営者の言葉でストーリーを描き、そこからMVVを抽出する順序が正しい</span></li>
-            <li className="flex items-start gap-2"><span className="text-[#fbbf24] shrink-0 mt-1">▸</span><span>「想い」が届くブランドは、デザイン以前に言語設計で決まる。一貫したブランドストーリーを持つ企業は<strong className="text-white">顧客ロイヤルティが平均1.5〜2倍</strong>になる傾向</span></li>
+            <li className="flex items-start gap-2"><span className="text-[#fbbf24] shrink-0">▸</span><span>ブランドの核になる「想い」はすでにあなたの中に存在している。それを第三者の視点で引き出し、ターゲットが理解できる言葉に翻訳するのが専門家の仕事</span></li>
+            <li className="flex items-start gap-2"><span className="text-[#fbbf24] shrink-0">▸</span><span>MVVが空虚になる理由の9割は「フレームワーク先行」。まず経営者の言葉でストーリーを描き、そこからMVVを抽出する順序が正しい</span></li>
+            <li className="flex items-start gap-2"><span className="text-[#fbbf24] shrink-0">▸</span><span>「想い」が届くブランドは、デザイン以前に言語設計で決まる。一貫したブランドストーリーを持つ企業は<strong className="text-white">顧客ロイヤルティが平均1.5〜2倍</strong>になる傾向</span></li>
           </ul>
         </div>
       </div>
@@ -245,7 +246,7 @@ function WhyUs() {
             <ul className="space-y-4">
               {strengths.map((s) => (
                 <li key={s.n} className="flex items-start gap-3">
-                  <span className="shrink-0 font-black text-[#fbbf24] text-[14px] leading-none mt-0.5 w-5">{s.n}</span>
+                  <span className="shrink-0 font-black text-[#fbbf24] text-[14px] w-5 mt-[3px]">{s.n}</span>
                   <div><span className="font-bold text-white text-[14px]">{s.title}</span><p className="text-[12.5px] text-white/70 leading-[1.7] mt-0.5">{s.desc}</p></div>
                 </li>
               ))}
