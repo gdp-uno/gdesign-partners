@@ -235,7 +235,7 @@ function Problem() {
           </p>
           <ul className="space-y-3 text-[13px] text-white/80 leading-[1.85]">
             <li className="flex items-start gap-2"><span className="text-[#fbbf24] shrink-0 mt-1">▸</span><span>業者分散により、打ち合わせ・調整などの<strong className="text-white">「見えないコスト」</strong>が平均2〜3ヶ月分の時間ロスを生む</span></li>
-            <li className="flex items-start gap-2"><span className="text-[#fbbf24] shrink-0 mt-1">▸</span><span>ブランドツールの不統一が、最初の商談での<strong className="text-white">信頼感の低下</strong>を招き、受注率に直結する</span></li>
+            <li className="flex items-start gap-2"><span className="text-[#fbbf24] shrink-0 mt-1">▸</span><span>ブランドツール（ロゴ・名刺・HP・営業資料）の不統一が、最初の商談での<strong className="text-white">信頼感の低下</strong>を招き、受注率に直結する</span></li>
             <li className="flex items-start gap-2"><span className="text-[#fbbf24] shrink-0 mt-1">▸</span><span>創業期にブランドの土台を整えた企業は、整備前と比べて初年度の受注単価が<strong className="text-white">平均1.4倍</strong>向上する傾向がある</span></li>
           </ul>
         </div>
