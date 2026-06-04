@@ -295,6 +295,12 @@ function Plans() {
               </div>
             </div>
           </div>
+          <div className="mt-8 bg-gradient-to-br from-[#fef9c3] to-[#fff7e6] border-2 border-[#fbbf24] rounded-2xl p-6 sm:p-8 max-w-3xl mx-auto text-center">
+            <div className="font-black text-[#0a1f3d] text-[18px] mb-2">ご契約特典</div>
+            <p className="text-[13px] text-[#475569] leading-[1.85]">
+              生成AI（ChatGPT・Claude）業務活用カリキュラムを<span className="font-bold text-[#dc2626]">無料視聴</span>。<br />ご契約者様限定のオンライン講座で、AI活用ノウハウを体系的に学べます。
+            </p>
+          </div>
         </div>
         <div className="mt-16">
           <div className="flex items-center justify-center gap-3 mb-7"><span className="w-10 h-px bg-[#15447b]/30" /><span className="font-bold text-[15px] text-[#15447b]">月額固定サポートプラン（オプション）</span><span className="w-10 h-px bg-[#15447b]/30" /></div>
