@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import BasicHeader from "@/components/lp/basic/BasicHeader";
+import { getAvailableSeats } from "@/lib/seats";
 
 export const metadata: Metadata = {
   title: "価格競争から脱却したい経営者へ｜戦略ブランディング支援 | Growth Design Partners",
@@ -18,15 +19,16 @@ export const metadata: Metadata = {
 };
 
 export default function BrandValueLayout({ children }: { children: React.ReactNode }) {
+  const seats = getAvailableSeats();
   return (
     <>
       <div className="fixed top-0 inset-x-0 z-50 bg-gradient-to-r from-[#15447b] via-[#1a5494] to-[#15447b] text-white shadow-md">
         <div className="max-w-[1280px] mx-auto px-4 sm:px-8 h-10 flex items-center justify-between text-[12px] sm:text-[13px] font-bold gap-3">
           <div className="flex items-center gap-2 min-w-0">
             <span className="bg-[#fbbf24] text-[#0a1f3d] px-2 py-0.5 text-[10px] font-black tracking-widest shrink-0">限定</span>
-            <span className="hidden sm:inline">毎月4社限定受付！</span>
+            <span className="hidden sm:inline">毎月5社限定受付！</span>
             <span>今月残り</span>
-            <span className="inline-flex items-baseline px-1.5 bg-[#fbbf24] text-[#7c2d12] font-black text-[16px] tabular-nums leading-none py-0.5 animate-pulse">3</span>
+            <span className="inline-flex items-baseline px-1.5 bg-[#fbbf24] text-[#7c2d12] font-black text-[16px] tabular-nums leading-none py-0.5 animate-pulse">{seats}</span>
             <span>社</span>
           </div>
           <a href="#cta" className="hidden md:flex items-center gap-2 text-[11px] opacity-90 hover:opacity-100 hover:underline underline-offset-2 transition">

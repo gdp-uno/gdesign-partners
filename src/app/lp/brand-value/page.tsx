@@ -56,10 +56,11 @@ function FV() {
             <Ico d={I.star} size={14} className="text-[#fbbf24] fill-[#fbbf24]" />
             <span className="font-bold text-[12px] sm:text-[13px] text-[#15447b]">価格競争に疲れた経営者の方へ</span>
           </div>
-          <h1 className="font-black text-[#0a1f3d] leading-[1.3] tracking-[-0.01em] text-[22px] sm:text-[38px] lg:text-[42px] mb-5">
-            相見積もりで疲弊する前に、<br />
-            あなたの技術力を<br />
-            <Highlight color="#fbbf24">「選ばれる真価」</Highlight>に変えませんか。
+          <h1 className="font-black text-[#0a1f3d] leading-[1.3] tracking-[-0.01em] text-[20px] sm:text-[38px] lg:text-[42px] mb-5 [text-wrap:balance]">
+            <span className="inline-block">相見積もりで疲弊する前に、</span>
+            <span className="inline-block">あなたの技術力を</span>
+            <span className="inline-block"><Highlight color="#fbbf24">「選ばれる真価」</Highlight></span>
+            <span className="inline-block">に変えませんか。</span>
           </h1>
           <p className="text-[15px] sm:text-[16px] text-[#475569] leading-[1.9] mb-8">
             市場分析・ポジショニングから始まる戦略的ブランディングで、<br className="hidden sm:block" />
@@ -170,9 +171,9 @@ function Problem() {
           <div className="font-mono text-[10px] tracking-[0.3em] text-[#fbbf24] mb-3 font-bold">INSIGHT</div>
           <p className="text-white font-bold text-[18px] sm:text-[20px] leading-[1.6] mb-4">価格競争の本質は、「選ばれる理由」が言語化されていないことにあります。</p>
           <ul className="space-y-3 text-[13px] text-white/80 leading-[1.85]">
-            <li className="flex items-start gap-2"><span className="text-[#fbbf24] shrink-0 mt-1">▸</span><span>中小企業の約6割が「自社の強みを言語化できていない」と回答しており、それが相見積もり合戦の根本原因になっている</span></li>
-            <li className="flex items-start gap-2"><span className="text-[#fbbf24] shrink-0 mt-1">▸</span><span>ブランド戦略を整備した企業は、整備前と比べて受注単価が<strong className="text-white">平均1.4倍</strong>向上する傾向がある</span></li>
-            <li className="flex items-start gap-2"><span className="text-[#fbbf24] shrink-0 mt-1">▸</span><span>「なぜ弊社か」を論理的に伝えられるブランドステートメントは、商談の質と受注確率を同時に上げる最も効果的な投資</span></li>
+            <li className="flex items-start gap-2"><span className="text-[#fbbf24] shrink-0">▸</span><span>中小企業の約6割が「自社の強みを言語化できていない」と回答しており、それが相見積もり合戦の根本原因になっている</span></li>
+            <li className="flex items-start gap-2"><span className="text-[#fbbf24] shrink-0">▸</span><span>ブランド戦略を整備した企業は、整備前と比べて受注単価が<strong className="text-white">平均1.4倍</strong>向上する傾向がある</span></li>
+            <li className="flex items-start gap-2"><span className="text-[#fbbf24] shrink-0">▸</span><span>「なぜ弊社か」を論理的に伝えられるブランドステートメントは、商談の質と受注確率を同時に上げる最も効果的な投資</span></li>
           </ul>
         </div>
       </div>
