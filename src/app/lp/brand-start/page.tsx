@@ -207,15 +207,15 @@ function Problem() {
       <div className="max-w-[1280px] mx-auto px-4 sm:px-8">
         <Kicker jp="お悩み" en="PROBLEM" color="#dc2626" />
         <SectionTitle>
-          起業準備中によくある<Highlight color="#fecaca">「詰まり」</Highlight>、ありませんか？
+          <span className="inline-block">起業準備中によくある</span><span className="inline-block"><Highlight color="#fecaca">「詰まり」</Highlight>、ありませんか？</span>
         </SectionTitle>
         <p className="text-center text-[14px] sm:text-[15px] text-[#475569] mt-5 leading-[2] max-w-2xl mx-auto">
           複数の業者への問い合わせ・調整に疲れ、事業開始が遅れていませんか。<br className="hidden sm:block" />
           一つでも当てはまるなら、今すぐ解決する方法があります。
         </p>
-        <div className="mt-12 grid md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
+        <div className="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-4 sm:gap-5">
           {PROBLEMS.map((p, i) => (
-            <div key={i} className={`relative bg-[#f8fafc] border-2 border-[#e2e8f0] hover:border-[#15447b] hover:bg-white transition-all rounded-2xl p-6 group ${i === 4 ? "md:col-span-2 lg:col-span-3 lg:max-w-xl lg:mx-auto" : ""}`}>
+            <div key={i} className={`relative bg-[#f8fafc] border-2 border-[#e2e8f0] hover:border-[#15447b] hover:bg-white transition-all rounded-2xl p-6 group lg:col-span-2 ${i === 3 ? "lg:col-start-2" : ""} ${i === 4 ? "md:col-span-2 md:max-w-md md:mx-auto lg:col-start-4 lg:max-w-none lg:mx-0" : ""}`}>
               <div className="absolute -top-3 -left-3 w-9 h-9 bg-gradient-to-br from-[#15447b] to-[#0a1f3d] text-white rounded-full flex items-center justify-center font-mono font-black text-[14px] shadow-md">
                 {String(i + 1).padStart(2, "0")}
               </div>
