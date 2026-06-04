@@ -56,10 +56,18 @@ function SectionTitle({ children }: { children: React.ReactNode }) {
   return <h2 className="font-black text-[#0a1f3d] text-[28px] sm:text-[36px] lg:text-[44px] leading-[1.35] tracking-[-0.01em] text-center max-w-4xl mx-auto">{children}</h2>;
 }
 function Highlight({ children, color = "#fbbf24" }: { children: React.ReactNode; color?: string }) {
+  // 下線は absolute をやめ、文字背面の背景帯で表現（折り返しても各行に正しく描画）
   return (
-    <span className="relative inline-block">
-      <span className="relative z-10">{children}</span>
-      <span className="absolute left-0 right-0 bottom-0 h-2.5 -z-0 opacity-60" style={{ background: color }} />
+    <span
+      className="[box-decoration-break:clone] [-webkit-box-decoration-break:clone]"
+      style={{
+        backgroundImage: `linear-gradient(${color}99, ${color}99)`,
+        backgroundRepeat: "no-repeat",
+        backgroundPosition: "0 100%",
+        backgroundSize: "100% 0.625rem",
+      }}
+    >
+      {children}
     </span>
   );
 }
@@ -309,7 +317,7 @@ function WhyUs() {
       <div className="max-w-[1280px] mx-auto px-4 sm:px-8">
         <Kicker jp="選ばれる理由" en="WHY US" color="#15447b" />
         <SectionTitle>
-          なぜ、<Highlight>Growth Design Partners</Highlight>が選ばれるのか
+          なぜ、<Highlight>Growth Design Partners</Highlight><span className="inline-block">が選ばれるのか</span>
         </SectionTitle>
         <div className="mt-12 grid md:grid-cols-2 gap-5">
           <div className="bg-[#f8fafc] border-2 border-[#e2e8f0] rounded-2xl p-7 sm:p-8">
@@ -338,7 +346,7 @@ function WhyUs() {
             <ul className="space-y-4">
               {strengths.map((s) => (
                 <li key={s.n} className="flex items-start gap-3">
-                  <span className="shrink-0 font-black text-[#fbbf24] text-[14px] leading-none mt-0.5 w-5">{s.n}</span>
+                  <span className="shrink-0 font-black text-[#fbbf24] text-[14px] w-5">{s.n}</span>
                   <div>
                     <span className="font-bold text-white text-[14px]">{s.title}</span>
                     <p className="text-[12.5px] text-white/70 leading-[1.7] mt-0.5">{s.desc}</p>
