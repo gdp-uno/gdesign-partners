@@ -67,7 +67,7 @@ function FV() {
           </h1>
           <p className="text-[15px] sm:text-[16px] text-white/80 leading-[1.9] mb-8">
             AI活用で従来の<strong className="text-[#fbbf24]">1/3以下のコスト</strong>で実現。<br className="hidden sm:block" />
-            ITが苦手な現場でも「使えるまで」、一緒に走ります。
+            ITが苦手な現場でも「使えるまで」一緒に走ります。
           </p>
           <div className="flex flex-col sm:flex-row gap-4">
             <a href="#cta" onClick={() => trackEvent("click_fv_cta", { page: "dx_field" })}
@@ -85,7 +85,7 @@ function FV() {
           </div>
         </div>
         <div className="relative">
-          <div className="hidden lg:flex absolute -top-6 -right-3 z-20 w-32 h-32 rounded-full bg-gradient-to-br from-[#fbbf24] to-[#c9a227] text-[#0a1f3d] flex-col items-center justify-center shadow-xl rotate-[8deg] ring-4 ring-white/20">
+          <div className="hidden lg:flex absolute -top-10 -right-4 z-20 w-28 h-28 rounded-full bg-gradient-to-br from-[#fbbf24] to-[#c9a227] text-[#0a1f3d] flex-col items-center justify-center shadow-xl rotate-[8deg] ring-4 ring-white/20">
             <span className="font-black text-[13px] leading-none text-center">AI活用で</span>
             <span className="font-black text-[24px] leading-none text-[#0a1f3d] text-center">1/3</span>
             <span className="font-black text-[13px] leading-none text-center">のコスト</span>
@@ -266,7 +266,7 @@ function Plans() {
   const spots = [
     { code: "SPOT 01", name: "スポット（ライト）", price: "200,000", unit: "〜", period: "0.5ヶ月 / 15時間", items: ["業務棚卸し・優先順位設計", "特定業務1〜2本のDX設計", "ツール選定・基本設定", "現場トレーニング（1回）"] },
     { code: "SPOT 02", name: "スポット（スタンダード）", price: "450,000", unit: "〜", period: "0.5〜1ヶ月 / 35時間", items: ["業務棚卸し・全体設計", "主要業務3〜5本のDX構築", "AI活用自動化フロー設計", "現場トレーニング・マニュアル作成"], featured: true },
-    { code: "SPOT 03", name: "スポット（フル）", price: "900,000", unit: "〜", period: "1.5〜2ヶ月 / 75時間", items: ["業務全体の設計・再構築", "全主要業務のDX一括対応", "AI活用・データ連携設計", "定着支援・改善サポート"] },
+    { code: "SPOT 03", name: "スポット（フル）", price: "900,000", unit: "〜", period: "1.5〜2ヶ月 / 75時間", items: ["業務全体の設計・再構築", "主要業務全体のDX対応", "AI活用・データ連携設計", "定着支援・改善サポート"] },
   ];
   const subs = [
     { code: "SUB 01", name: "ライト", price: "50,000", hours: "5時間/月" },
@@ -322,6 +322,12 @@ function Plans() {
               </div>
             ))}
           </div>
+        </div>
+        <div className="mt-8 bg-gradient-to-br from-[#fef9c3] to-[#fff7e6] border-2 border-[#fbbf24] rounded-2xl p-6 sm:p-8 max-w-3xl mx-auto text-center">
+          <div className="font-black text-[#0a1f3d] text-[18px] mb-2">ご契約特典</div>
+          <p className="text-[13px] text-[#475569] leading-[1.85]">
+            生成AI活用カリキュラムを<span className="font-bold text-[#dc2626]">無料視聴</span>。<br />ChatGPT・Claude などの業務活用ノウハウを体系的に学べるオンライン講座を、ご契約者様限定でご覧いただけます。
+          </p>
         </div>
         <p className="mt-8 text-center text-[11px] text-[#64748b]">※ 表示価格はすべて税抜。スポットプランは着手前に50%前払い。サブスクは最低3ヶ月契約（以降1ヶ月単位で更新）</p>
       </div>
