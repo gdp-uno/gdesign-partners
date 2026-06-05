@@ -155,7 +155,7 @@ function Problem() {
     <section id="problem" className="relative py-16 sm:py-24 bg-white">
       <div className="max-w-[1280px] mx-auto px-4 sm:px-8">
         <Kicker jp="お悩み" en="PROBLEM" color="#dc2626" />
-        <SectionTitle>想いはある。でも<span className="inline-block"><Highlight color="#fecaca">言葉にならない</Highlight></span><span className="inline-block">のはなぜか？</span></SectionTitle>
+        <SectionTitle>想いはある。<br />でも<span className="inline-block"><Highlight color="#fecaca">言葉にならない</Highlight></span><span className="inline-block">のはなぜか？</span></SectionTitle>
         <p className="text-center text-[14px] sm:text-[15px] text-[#475569] mt-5 leading-[2] max-w-2xl mx-auto">
           ブランディングで一番難しいのは「自分ごと」の言語化です。<br className="hidden sm:block" />近すぎて見えない、を一緒に解決します。
         </p>
