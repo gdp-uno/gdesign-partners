@@ -16,7 +16,8 @@
  */
 
 const CONFIG = {
-  TO: 'info@gdesign-partners.co.jp',          // 通知先（Googleグループ）
+  TO: 'info@gdesign-partners.co.jp',          // 本番の通知先（Googleグループ）
+  STAGING_TO: 'uno@gdesign-partners.co.jp',   // テスト(staging)時の通知先（グループを汚さない）
   FROM_ALIAS: 'info@gdesign-partners.co.jp',  // 差出人（uno@に send-as 設定済の前提）
   FROM_NAME: 'GDP LP問い合わせ',
   SHEET_ID: '1Y9EPnyTL_A0e6xjQx8iOyT-YaRW0LlJURUKEa8msjVo',  // GDP_LP問い合わせ_受信ログ（共有ドライブ>10_案件管理>97_LP問い合わせ）
@@ -130,7 +131,8 @@ function sendMail_(data, isStaging) {
   body.push('', '受信日時: ' + Utilities.formatDate(new Date(), 'Asia/Tokyo', 'yyyy/MM/dd HH:mm'));
   const bodyText = body.join('\n');
 
-  GmailApp.sendEmail(CONFIG.TO, subject, bodyText, {
+  const to = isStaging ? (CONFIG.STAGING_TO || CONFIG.TO) : CONFIG.TO;
+  GmailApp.sendEmail(to, subject, bodyText, {
     from: CONFIG.FROM_ALIAS,
     name: CONFIG.FROM_NAME,
     replyTo: data.email || CONFIG.FROM_ALIAS,
