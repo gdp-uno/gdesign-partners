@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { submitContactForm } from "@/lib/contact";
 import { useScrollTracking } from "@/lib/useScrollTracking";
 import { getAvailableSeats } from "@/lib/seats";
 import DxDiagram from "@/components/lp/DxDiagram";
@@ -773,8 +774,13 @@ function FAQ() {
 // ── CTA / Contact ─────────────────────────────────────────────────────
 function CTA() {
   const seats = getAvailableSeats();
-  function handleSubmit() {
+  const [submitting, setSubmitting] = useState(false);
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    if (submitting) return;
     trackEvent("generate_lead", { event_category: "lp_dx", event_label: "contact_form_submit" });
+    setSubmitting(true);
+    await submitContactForm(e.currentTarget, "dx");
   }
   return (
     <section id="cta" className="relative py-16 sm:py-24 bg-gradient-to-br from-[#15447b] via-[#0a1f3d] to-[#060d1c] overflow-hidden">
@@ -797,8 +803,6 @@ function CTA() {
 
         <div className="bg-white rounded-3xl p-7 sm:p-10 shadow-2xl">
           <form
-            action="https://formsubmit.co/info@gdesign-partners.co.jp"
-            method="POST"
             onSubmit={handleSubmit}
             className="space-y-5"
           >
@@ -853,10 +857,9 @@ function CTA() {
                 className="w-full bg-white border-2 border-[#e2e8f0] focus:border-[#15447b] text-[#0a1f3d] px-4 py-3 text-[14px] outline-none transition placeholder:text-[#94a3b8] resize-none rounded-xl" />
             </div>
 
-            <button type="submit"
-              className="group w-full h-14 bg-gradient-to-b from-[#fbbf24] to-[#c9a227] hover:from-[#f0d87a] hover:to-[#fbbf24] text-[#0a1f3d] font-black text-[16px] rounded-full shadow-[0_6px_0_#92760e,0_8px_24px_rgba(201,162,39,0.4)] hover:shadow-[0_3px_0_#92760e,0_4px_12px_rgba(201,162,39,0.4)] hover:translate-y-[3px] transition-all flex items-center justify-center gap-3 mt-2">
-              無料相談を申し込む
-              <Ico d={I.arrow} size={18} />
+            <button type="submit" disabled={submitting}
+              className="group w-full h-14 bg-gradient-to-b from-[#fbbf24] to-[#c9a227] hover:from-[#f0d87a] hover:to-[#fbbf24] text-[#0a1f3d] font-black text-[16px] rounded-full shadow-[0_6px_0_#92760e,0_8px_24px_rgba(201,162,39,0.4)] hover:shadow-[0_3px_0_#92760e,0_4px_12px_rgba(201,162,39,0.4)] hover:translate-y-[3px] transition-all flex items-center justify-center gap-3 mt-2 disabled:opacity-60 disabled:cursor-not-allowed">
+              {submitting ? "送信中…" : <>無料相談を申し込む<Ico d={I.arrow} size={18} /></>}
             </button>
             <p className="text-[11px] text-[#94a3b8] text-center">送信後、2営業日以内にご連絡します</p>
           </form>

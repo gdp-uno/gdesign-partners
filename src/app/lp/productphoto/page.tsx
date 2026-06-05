@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { submitContactForm } from "@/lib/contact";
 import Image from "next/image";
 
 declare global {
@@ -480,10 +481,12 @@ function SpecialOffer() {
 function CTA() {
   const [submitted, setSubmitted] = useState(false);
 
-  function handleSubmit(e: React.FormEvent) {
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    if (submitted) return;
     trackEvent("submit_form_productphoto", { position: "cta" });
-    if (submitted) e.preventDefault();
-    else setSubmitted(true);
+    setSubmitted(true);
+    await submitContactForm(e.currentTarget, "productphoto");
   }
 
   const inputCls = "w-full bg-white border-2 border-[#dce8f2] focus:border-[#0a1f3d] text-[#0a1f3d] px-4 h-12 text-[14px] outline-none transition placeholder:text-[#a0b4c8] rounded-xl";
@@ -503,8 +506,6 @@ function CTA() {
 
         <div className="bg-white rounded-3xl p-7 sm:p-10 border border-[#dce8f2] shadow-sm">
           <form
-            action="https://formsubmit.co/info@gdesign-partners.co.jp"
-            method="POST"
             onSubmit={handleSubmit}
             className="space-y-5"
           >
@@ -555,10 +556,9 @@ function CTA() {
                 className="w-full bg-white border-2 border-[#dce8f2] focus:border-[#0a1f3d] text-[#0a1f3d] px-4 py-3 text-[14px] outline-none transition placeholder:text-[#a0b4c8] resize-none rounded-xl" />
             </div>
 
-            <button type="submit"
-              className="w-full h-14 bg-[#E8602C] hover:bg-[#ff7240] text-white font-bold text-[16px] rounded-full shadow-[0_6px_0_#9c3c15] hover:shadow-[0_3px_0_#9c3c15] hover:translate-y-[3px] transition-all flex items-center justify-center gap-3 mt-2">
-              無料相談・お見積りはこちら
-              <Ico d={I.arrow} size={18} />
+            <button type="submit" disabled={submitted}
+              className="w-full h-14 bg-[#E8602C] hover:bg-[#ff7240] text-white font-bold text-[16px] rounded-full shadow-[0_6px_0_#9c3c15] hover:shadow-[0_3px_0_#9c3c15] hover:translate-y-[3px] transition-all flex items-center justify-center gap-3 mt-2 disabled:opacity-60 disabled:cursor-not-allowed">
+              {submitted ? "送信中…" : <>無料相談・お見積りはこちら<Ico d={I.arrow} size={18} /></>}
             </button>
             <p className="text-[11px] text-[#a0b4c8] text-center">送信後、担当者より2営業日以内にご連絡します</p>
           </form>
