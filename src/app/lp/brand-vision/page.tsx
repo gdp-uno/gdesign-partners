@@ -99,7 +99,7 @@ function FV() {
               <span className="text-[13px] text-[#64748b] mb-1">（税別）</span>
             </div>
             <ul className="space-y-2.5">
-              {["MVV（ミッション・ビジョン・バリュー）策定", "ブランドステートメント策定（必須）", "ブランドストーリー・コンセプト設計", "ロゴデザイン（3案）", "名刺デザイン（3案）", "HP制作（4-5P・撮影込み）", "営業用会社紹介資料（A4換算6-8P）"].map((f) => (
+              {["MVV（ミッション・ビジョン・バリュー）策定", "ブランドステートメント策定（必須）", "ロゴデザイン（3案）", "名刺デザイン（3案）", "HP制作（4-5P・撮影込み）", "営業用会社紹介資料（A4換算6-8P）"].map((f) => (
                 <li key={f} className="flex items-center gap-2.5 text-[13px] text-[#0a1f3d]">
                   <span className="shrink-0 w-5 h-5 bg-[#22c55e] rounded-full flex items-center justify-center"><Ico d={I.check} size={11} className="text-white" /></span>{f}
                 </li>
@@ -261,8 +261,8 @@ function WhyUs() {
 
 function Plans() {
   const monthly = [
-    { code: "LIGHT", name: "ライトサポート", price: "50,000", items: ["月次ブランド面談（60分）", "メール相談 無制限", "HP軽微更新（月1回）", "SNS投稿文のレビュー（月3件）"] },
-    { code: "PRO", name: "プロサポート", price: "100,000", items: ["月次ブランド面談（月2回）", "メール相談 無制限", "HP更新（月2回）", "SNS投稿制作（月3枚）", "新規営業リスト作成（月50件）"], featured: true },
+    { code: "LIGHT", name: "ライトサポート", price: "50,000", items: ["月次戦略面談（月1回・60分）", "メール相談 無制限", "HP軽微更新（月1回・1時間以内）", "営業ツール添削（月3件：SNS投稿文・営業メール・提案書）", "業務効率化ワンポイントアドバイス", "簡易月次レポート（A4 1枚）"] },
+    { code: "PRO", name: "プロサポート", price: "100,000", items: ["月次戦略面談（月2回）", "メール相談 無制限", "HP軽微更新（月2回・3時間以内）", "SNS投稿制作（月3枚）", "新規営業リスト作成（月50件）", "営業スクリプト月次改善", "業務効率化ワンポイントアドバイス", "簡易月次レポート（A4 2枚）"], featured: true },
   ];
   return (
     <section id="plans" className="relative py-16 sm:py-24 bg-gradient-to-b from-[#fdf4ff] to-[#f5f0fb]">
@@ -286,7 +286,7 @@ function Plans() {
               </div>
               <div>
                 <ul className="space-y-2.5 mb-7">
-                  {["MVV（ミッション・ビジョン・バリュー）策定", "ブランドストーリー・コンセプト設計", "ブランドステートメント策定", "ロゴデザイン（3案・バリエーション含む）", "名刺デザイン（3案・表面/裏面）", "HP制作（4-5P・撮影込み）", "会社紹介資料（A4換算6-8P）"].map((f) => (
+                  {["MVV（ミッション・ビジョン・バリュー）策定", "ブランドステートメント策定", "ロゴデザイン（3案・バリエーション含む）", "名刺デザイン（3案・表面/裏面）", "HP制作（4-5P・撮影込み）", "会社紹介資料（A4換算6-8P）"].map((f) => (
                     <li key={f} className="flex items-center gap-2.5 text-[13px] text-[#0a1f3d]">
                       <span className="shrink-0 w-5 h-5 bg-[#22c55e] rounded-full flex items-center justify-center"><Ico d={I.check} size={11} className="text-white" /></span>{f}
                     </li>
