@@ -329,7 +329,7 @@ function Plans() {
             生成AI活用カリキュラムを<span className="font-bold text-[#dc2626]">無料視聴</span>。<br />ChatGPT・Claude などの業務活用ノウハウを体系的に学べるオンライン講座を、ご契約者様限定でご覧いただけます。
           </p>
         </div>
-        <p className="mt-8 text-center text-[11px] text-[#64748b]">※ 表示価格はすべて税抜。スポットプランは着手前に50%前払い。サブスクは最低3ヶ月契約（以降1ヶ月単位で更新）</p>
+        <p className="mt-8 text-center text-[11px] text-[#64748b]">※ 表示価格はすべて税抜。スポットプランは着手前に50%前払い。サブスクはスタンダード以上が最低3ヶ月（ライトは契約期間なし）／以降1ヶ月単位で更新</p>
       </div>
     </section>
   );
