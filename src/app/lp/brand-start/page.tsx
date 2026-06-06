@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { submitContactForm } from "@/lib/contact";
 import { useScrollTracking } from "@/lib/useScrollTracking";
 import { getAvailableSeats } from "@/lib/seats";
 
@@ -56,10 +57,18 @@ function SectionTitle({ children }: { children: React.ReactNode }) {
   return <h2 className="font-black text-[#0a1f3d] text-[28px] sm:text-[36px] lg:text-[44px] leading-[1.35] tracking-[-0.01em] text-center max-w-4xl mx-auto">{children}</h2>;
 }
 function Highlight({ children, color = "#fbbf24" }: { children: React.ReactNode; color?: string }) {
+  // 下線は absolute をやめ、文字背面の背景帯で表現（折り返しても各行に正しく描画）
   return (
-    <span className="relative inline-block">
-      <span className="relative z-10">{children}</span>
-      <span className="absolute left-0 right-0 bottom-0 h-2.5 -z-0 opacity-60" style={{ background: color }} />
+    <span
+      className="[box-decoration-break:clone] [-webkit-box-decoration-break:clone]"
+      style={{
+        backgroundImage: `linear-gradient(${color}99, ${color}99)`,
+        backgroundRepeat: "no-repeat",
+        backgroundPosition: "0 100%",
+        backgroundSize: "100% 0.625rem",
+      }}
+    >
+      {children}
     </span>
   );
 }
@@ -82,10 +91,10 @@ function FV() {
             <Ico d={I.bolt} size={14} className="text-[#fbbf24] fill-[#fbbf24]" />
             <span className="font-bold text-[12px] sm:text-[13px] text-[#15447b]">起業準備中・創業直後の方へ</span>
           </div>
-          <h1 className="font-black text-[#0a1f3d] leading-[1.3] tracking-[-0.01em] text-[22px] sm:text-[38px] lg:text-[42px] mb-5">
-            3社への問い合わせで<br />
-            <Highlight color="#fbbf24">疲れたなら</Highlight>、<br />
-            今すぐここで完結させましょう。
+          <h1 className="font-black text-[#0a1f3d] leading-[1.3] tracking-[-0.01em] text-[20px] sm:text-[38px] lg:text-[42px] mb-5 [text-wrap:balance]">
+            <span className="inline-block">3社への問い合わせで</span>
+            <span className="inline-block"><Highlight color="#fbbf24">疲れたなら</Highlight>、</span>
+            <span className="inline-block">今すぐここで完結させましょう。</span>
           </h1>
           <p className="text-[15px] sm:text-[16px] text-[#475569] leading-[1.9] mb-8">
             ロゴ・名刺・HP・営業資料まで、<strong className="text-[#0a1f3d]">1社・4週間</strong>でブランドをまるごと整えます。<br />
@@ -207,15 +216,15 @@ function Problem() {
       <div className="max-w-[1280px] mx-auto px-4 sm:px-8">
         <Kicker jp="お悩み" en="PROBLEM" color="#dc2626" />
         <SectionTitle>
-          起業準備中によくある<Highlight color="#fecaca">「詰まり」</Highlight>、ありませんか？
+          <span className="inline-block">起業準備中によくある</span><span className="inline-block"><Highlight color="#fecaca">「詰まり」</Highlight>、ありませんか？</span>
         </SectionTitle>
         <p className="text-center text-[14px] sm:text-[15px] text-[#475569] mt-5 leading-[2] max-w-2xl mx-auto">
           複数の業者への問い合わせ・調整に疲れ、事業開始が遅れていませんか。<br className="hidden sm:block" />
           一つでも当てはまるなら、今すぐ解決する方法があります。
         </p>
-        <div className="mt-12 grid md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
+        <div className="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-4 sm:gap-5">
           {PROBLEMS.map((p, i) => (
-            <div key={i} className={`relative bg-[#f8fafc] border-2 border-[#e2e8f0] hover:border-[#15447b] hover:bg-white transition-all rounded-2xl p-6 group ${i === 4 ? "md:col-span-2 lg:col-span-3 lg:max-w-xl lg:mx-auto" : ""}`}>
+            <div key={i} className={`relative bg-[#f8fafc] border-2 border-[#e2e8f0] hover:border-[#15447b] hover:bg-white transition-all rounded-2xl p-6 group lg:col-span-2 ${i === 3 ? "lg:col-start-2" : ""} ${i === 4 ? "md:col-span-2 md:max-w-md md:mx-auto lg:col-start-4 lg:max-w-none lg:mx-0" : ""}`}>
               <div className="absolute -top-3 -left-3 w-9 h-9 bg-gradient-to-br from-[#15447b] to-[#0a1f3d] text-white rounded-full flex items-center justify-center font-mono font-black text-[14px] shadow-md">
                 {String(i + 1).padStart(2, "0")}
               </div>
@@ -234,9 +243,9 @@ function Problem() {
             起業準備期は「見えないコスト」が最も膨らみやすいフェーズです。
           </p>
           <ul className="space-y-3 text-[13px] text-white/80 leading-[1.85]">
-            <li className="flex items-start gap-2"><span className="text-[#fbbf24] shrink-0 mt-1">▸</span><span>業者分散により、打ち合わせ・調整などの<strong className="text-white">「見えないコスト」</strong>が平均2〜3ヶ月分の時間ロスを生む</span></li>
-            <li className="flex items-start gap-2"><span className="text-[#fbbf24] shrink-0 mt-1">▸</span><span>ブランドツールの不統一が、最初の商談での<strong className="text-white">信頼感の低下</strong>を招き、受注率に直結する</span></li>
-            <li className="flex items-start gap-2"><span className="text-[#fbbf24] shrink-0 mt-1">▸</span><span>創業期にブランドの土台を整えた企業は、整備前と比べて初年度の受注単価が<strong className="text-white">平均1.4倍</strong>向上する傾向がある</span></li>
+            <li className="flex items-start gap-2"><span className="text-[#fbbf24] shrink-0">▸</span><span>業者分散により、打ち合わせ・調整などの<strong className="text-white">「見えないコスト」</strong>が平均2〜3ヶ月分の時間ロスを生む</span></li>
+            <li className="flex items-start gap-2"><span className="text-[#fbbf24] shrink-0">▸</span><span>ブランドツール（ロゴ・名刺・HP・営業資料）の不統一が、最初の商談での<strong className="text-white">信頼感の低下</strong>を招き、受注率に直結する</span></li>
+            <li className="flex items-start gap-2"><span className="text-[#fbbf24] shrink-0">▸</span><span>創業期にブランドの土台を整えた企業は、整備前と比べて初年度の受注単価が<strong className="text-white">平均1.4倍</strong>向上する傾向がある</span></li>
           </ul>
         </div>
       </div>
@@ -309,7 +318,9 @@ function WhyUs() {
       <div className="max-w-[1280px] mx-auto px-4 sm:px-8">
         <Kicker jp="選ばれる理由" en="WHY US" color="#15447b" />
         <SectionTitle>
-          なぜ、<Highlight>Growth Design Partners</Highlight>が選ばれるのか
+          <span className="block">なぜ、</span>
+          <span className="block"><Highlight>Growth Design Partners</Highlight></span>
+          <span className="block">が選ばれるのか</span>
         </SectionTitle>
         <div className="mt-12 grid md:grid-cols-2 gap-5">
           <div className="bg-[#f8fafc] border-2 border-[#e2e8f0] rounded-2xl p-7 sm:p-8">
@@ -338,7 +349,7 @@ function WhyUs() {
             <ul className="space-y-4">
               {strengths.map((s) => (
                 <li key={s.n} className="flex items-start gap-3">
-                  <span className="shrink-0 font-black text-[#fbbf24] text-[14px] leading-none mt-0.5 w-5">{s.n}</span>
+                  <span className="shrink-0 font-black text-[#fbbf24] text-[14px] w-5 mt-[3px]">{s.n}</span>
                   <div>
                     <span className="font-bold text-white text-[14px]">{s.title}</span>
                     <p className="text-[12.5px] text-white/70 leading-[1.7] mt-0.5">{s.desc}</p>
@@ -502,7 +513,7 @@ const FAQS = [
 ];
 
 function FAQ() {
-  const [open, setOpen] = useState(0);
+  const [open, setOpen] = useState<Set<number>>(new Set([0]));
   return (
     <section id="faq" className="relative py-16 sm:py-24 bg-gradient-to-b from-[#f0f6fc] to-[#e0f2fe]">
       <div className="max-w-[900px] mx-auto px-4 sm:px-8">
@@ -510,10 +521,10 @@ function FAQ() {
         <SectionTitle>気になる<Highlight>ご質問</Highlight></SectionTitle>
         <div className="mt-10 space-y-3">
           {FAQS.map((f, i) => {
-            const isOpen = open === i;
+            const isOpen = open.has(i);
             return (
               <div key={i} className={`bg-white rounded-2xl border-2 transition-all ${isOpen ? "border-[#15447b] shadow-lg" : "border-[#e2e8f0] hover:border-[#15447b]/40"}`}>
-                <button onClick={() => setOpen(isOpen ? -1 : i)} className="w-full text-left flex items-start justify-between gap-4 p-5 sm:p-6">
+                <button onClick={() => setOpen(prev => { const next = new Set(prev); if (next.has(i)) next.delete(i); else next.add(i); return next; })} className="w-full text-left flex items-start justify-between gap-4 p-5 sm:p-6">
                   <div className="flex items-start gap-4 flex-1">
                     <span className="shrink-0 w-9 h-9 bg-[#dc2626] text-white rounded-full flex items-center justify-center font-black text-[14px]">Q</span>
                     <span className="font-bold text-[#0a1f3d] text-[15px] sm:text-[16px] leading-[1.6] pt-1">{f.q}</span>
@@ -541,8 +552,13 @@ function FAQ() {
 // ── CTA ──────────────────────────────────────────────────────────────
 function CTA() {
   const seats = getAvailableSeats();
-  function handleSubmit() {
+  const [submitting, setSubmitting] = useState(false);
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    if (submitting) return;
     trackEvent("generate_lead", { event_category: "lp_brand_start", event_label: "contact_form_submit" });
+    setSubmitting(true);
+    await submitContactForm(e.currentTarget, "brand-start");
   }
   return (
     <section id="cta" className="relative py-16 sm:py-24 bg-gradient-to-br from-[#15447b] via-[#0a1f3d] to-[#060d1c] overflow-hidden">
@@ -560,7 +576,7 @@ function CTA() {
           </p>
         </div>
         <div className="bg-white rounded-3xl p-7 sm:p-10 shadow-2xl">
-          <form action="https://formsubmit.co/info@gdesign-partners.co.jp" method="POST" onSubmit={handleSubmit} className="space-y-5">
+          <form onSubmit={handleSubmit} className="space-y-5">
             <input type="hidden" name="_subject" value="【LP-A・起業準備】無料相談お申込み" />
             <input type="hidden" name="_next" value="https://gdesign-partners.co.jp/lp/brand-start/thanks" />
             <input type="hidden" name="_captcha" value="false" />
@@ -614,9 +630,8 @@ function CTA() {
               <textarea name="challenge" rows={4} placeholder="例：来月法人設立予定で、ロゴ・名刺・HPをまとめてお願いしたいと思っています..."
                 className="w-full bg-white border-2 border-[#e2e8f0] focus:border-[#15447b] text-[#0a1f3d] px-4 py-3 text-[14px] outline-none transition placeholder:text-[#94a3b8] resize-none rounded-xl" />
             </div>
-            <button type="submit" className="group w-full h-14 bg-gradient-to-b from-[#fbbf24] to-[#c9a227] hover:from-[#f0d87a] hover:to-[#fbbf24] text-[#0a1f3d] font-black text-[16px] rounded-full shadow-[0_6px_0_#92760e,0_8px_24px_rgba(201,162,39,0.4)] hover:shadow-[0_3px_0_#92760e] hover:translate-y-[3px] transition-all flex items-center justify-center gap-3 mt-2">
-              無料相談を申し込む
-              <Ico d={I.arrow} size={18} />
+            <button type="submit" disabled={submitting} className="group w-full h-14 bg-gradient-to-b from-[#fbbf24] to-[#c9a227] hover:from-[#f0d87a] hover:to-[#fbbf24] text-[#0a1f3d] font-black text-[16px] rounded-full shadow-[0_6px_0_#92760e,0_8px_24px_rgba(201,162,39,0.4)] hover:shadow-[0_3px_0_#92760e] hover:translate-y-[3px] transition-all flex items-center justify-center gap-3 mt-2 disabled:opacity-60 disabled:cursor-not-allowed">
+              {submitting ? "送信中…" : <>無料相談を申し込む<Ico d={I.arrow} size={18} /></>}
             </button>
             <p className="text-[11px] text-[#94a3b8] text-center">送信後、2営業日以内にご連絡します</p>
           </form>

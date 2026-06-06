@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { submitContactForm } from "@/lib/contact";
 import { useScrollTracking } from "@/lib/useScrollTracking";
 import { getAvailableSeats } from "@/lib/seats";
 import DxDiagram from "@/components/lp/DxDiagram";
@@ -61,9 +62,16 @@ function SectionTitle({ children }: { children: React.ReactNode }) {
 }
 function Highlight({ children, color = "#fbbf24" }: { children: React.ReactNode; color?: string }) {
   return (
-    <span className="relative inline-block">
-      <span className="relative z-10">{children}</span>
-      <span className="absolute left-0 right-0 bottom-0 h-2.5 -z-0 opacity-60" style={{ background: color }} />
+    <span
+      className="[box-decoration-break:clone] [-webkit-box-decoration-break:clone]"
+      style={{
+        backgroundImage: `linear-gradient(${color}99, ${color}99)`,
+        backgroundRepeat: "no-repeat",
+        backgroundPosition: "0 100%",
+        backgroundSize: "100% 0.625rem",
+      }}
+    >
+      {children}
     </span>
   );
 }
@@ -481,25 +489,25 @@ function Plans() {
     {
       code: "DIAGNOSIS", name: "業務診断", price: "200,000",
       desc: "約0.5ヶ月・15時間。業務棚卸し＆改善ロードマップ。",
-      items: ["業務ヒアリング & AsIs/ToBe分析", "自動化候補スコアリング", "改善ロードマップ（A4 1枚）"],
+      items: ["業務ヒアリング・業務棚卸し", "自動化候補スコアリング", "改善ロードマップ（A4 1枚）"],
     },
     {
       code: "BUILD", name: "仕組み構築", price: "450,000",
       desc: "0.5〜1.0ヶ月・35時間。複数の既存業務を効率化。",
-      items: ["ツール選定・設定・開発", "操作マニュアル一式", "現場レクチャー", "納品後2ヶ月バグ修正無料（2回まで）"],
+      items: ["AsIs/ToBe分析", "ツール選定・設定・開発", "操作マニュアル一式", "現場レクチャー", "納品後2ヶ月バグ修正無料（2回まで）"],
       featured: true,
     },
     {
       code: "REBUILD", name: "全社DX再設計", price: "900,000",
       desc: "1.5〜2.0ヶ月・75時間。部門・組織全体を再設計。",
-      items: ["全社業務フロー再設計", "複数領域のツール構築", "3ヶ月の運用伴走", "納品後2ヶ月バグ修正無料（2回まで）"],
+      items: ["全社業務フロー再設計", "複数領域のツール構築", "AsIs/ToBe分析（全社）", "納品後2ヶ月バグ修正無料（2回まで）"],
     },
   ];
   const subs = [
     { code: "LIGHT", name: "ライト伴走", price: "50,000", hours: "5h", items: ["月1回 戦略MTG", "ツール質問対応", "月次レポート"] },
     { code: "STANDARD", name: "スタンダード伴走", price: "120,000", hours: "10h", items: ["月2回 戦略MTG", "1業務領域の改善", "ドキュメント更新"], featured: true },
-    { code: "PRO", name: "プロ伴走", price: "300,000", hours: "30h", items: ["週1回 戦略MTG", "複数業務の並行改善", "優先サポート"] },
-    { code: "ENTERPRISE", name: "経営パートナー", price: "500,000", hours: "50h", items: ["週2回 経営MTG", "全社DX伴走", "専任チーム配置"] },
+    { code: "PRO", name: "プロ伴走", price: "300,000", hours: "30h", items: ["月次MTG＋改善提案・棚卸し（月1回）", "複数業務の並行改善", "優先サポート"] },
+    { code: "ENTERPRISE", name: "経営パートナー", price: "500,000", hours: "50h", items: ["月次MTG＋新規効率化提案（月1回）", "全社DX伴走", "専任チーム配置"] },
   ];
 
   return (
@@ -661,7 +669,7 @@ function Plans() {
           </div>
         </div>
 
-        <p className="mt-6 text-center text-[11px] text-[#64748b]">※ 表示価格はすべて税抜。最低契約期間：3ヶ月（以降1ヶ月単位で更新）</p>
+        <p className="mt-6 text-center text-[11px] text-[#64748b]">※ 表示価格はすべて税抜。最低契約期間：スタンダード伴走以上は3ヶ月（ライト伴走は契約期間なし）／以降1ヶ月単位で更新</p>
       </div>
     </section>
   );
@@ -715,7 +723,7 @@ const FAQS = [
   { q: "本当に少人数の組織でも依頼できますか？", a: "はい。むしろ5〜30名規模のスタートアップ・少人数組織を主なご支援対象としています。社長や責任者の時間が一番貴重なフェーズだからこそ、仕組み化の効果が大きく出ます。" },
   { q: "全国どこからでも相談できますか？", a: "はい。大阪拠点ですが、関西圏以外のお客様も全国対応しています。週1回のオンラインMTGをベースに、必要に応じて訪問もいたします。" },
   { q: "既存ツール（Salesforce・kintone等）を使い続けたいのですが？", a: "問題ありません。「いきなり乗り換え」は推奨していません。既存ツールを活かしつつ、足りない部分を補う設計を優先します。" },
-  { q: "途中解約はできますか？", a: "サブスクプランは最低3ヶ月、以降1ヶ月単位で解約・プラン変更が可能です。ご利用状況に合わせ柔軟に調整できます。" },
+  { q: "途中解約はできますか？", a: "スタンダード伴走以上は最低3ヶ月（ライト伴走は契約期間なし）、以降1ヶ月単位で解約・プラン変更が可能です。ご利用状況に合わせ柔軟に調整できます。" },
   { q: "業務の中身を共有するのが不安です。", a: "ご契約前にNDA（秘密保持契約）を締結いたします。アクセス権限も最小限に絞り、データの取り扱いも明文化のうえで進めます。" },
 ];
 
@@ -766,8 +774,13 @@ function FAQ() {
 // ── CTA / Contact ─────────────────────────────────────────────────────
 function CTA() {
   const seats = getAvailableSeats();
-  function handleSubmit() {
+  const [submitting, setSubmitting] = useState(false);
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    if (submitting) return;
     trackEvent("generate_lead", { event_category: "lp_dx", event_label: "contact_form_submit" });
+    setSubmitting(true);
+    await submitContactForm(e.currentTarget, "dx");
   }
   return (
     <section id="cta" className="relative py-16 sm:py-24 bg-gradient-to-br from-[#15447b] via-[#0a1f3d] to-[#060d1c] overflow-hidden">
@@ -790,8 +803,6 @@ function CTA() {
 
         <div className="bg-white rounded-3xl p-7 sm:p-10 shadow-2xl">
           <form
-            action="https://formsubmit.co/info@gdesign-partners.co.jp"
-            method="POST"
             onSubmit={handleSubmit}
             className="space-y-5"
           >
@@ -846,10 +857,9 @@ function CTA() {
                 className="w-full bg-white border-2 border-[#e2e8f0] focus:border-[#15447b] text-[#0a1f3d] px-4 py-3 text-[14px] outline-none transition placeholder:text-[#94a3b8] resize-none rounded-xl" />
             </div>
 
-            <button type="submit"
-              className="group w-full h-14 bg-gradient-to-b from-[#fbbf24] to-[#c9a227] hover:from-[#f0d87a] hover:to-[#fbbf24] text-[#0a1f3d] font-black text-[16px] rounded-full shadow-[0_6px_0_#92760e,0_8px_24px_rgba(201,162,39,0.4)] hover:shadow-[0_3px_0_#92760e,0_4px_12px_rgba(201,162,39,0.4)] hover:translate-y-[3px] transition-all flex items-center justify-center gap-3 mt-2">
-              無料相談を申し込む
-              <Ico d={I.arrow} size={18} />
+            <button type="submit" disabled={submitting}
+              className="group w-full h-14 bg-gradient-to-b from-[#fbbf24] to-[#c9a227] hover:from-[#f0d87a] hover:to-[#fbbf24] text-[#0a1f3d] font-black text-[16px] rounded-full shadow-[0_6px_0_#92760e,0_8px_24px_rgba(201,162,39,0.4)] hover:shadow-[0_3px_0_#92760e,0_4px_12px_rgba(201,162,39,0.4)] hover:translate-y-[3px] transition-all flex items-center justify-center gap-3 mt-2 disabled:opacity-60 disabled:cursor-not-allowed">
+              {submitting ? "送信中…" : <>無料相談を申し込む<Ico d={I.arrow} size={18} /></>}
             </button>
             <p className="text-[11px] text-[#94a3b8] text-center">送信後、2営業日以内にご連絡します</p>
           </form>

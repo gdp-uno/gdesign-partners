@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { submitContactForm } from "@/lib/contact";
 import { useScrollTracking } from "@/lib/useScrollTracking";
 import { getAvailableSeats } from "@/lib/seats";
 
@@ -39,7 +40,7 @@ function SectionTitle({ children }: { children: React.ReactNode }) {
   return <h2 className="font-black text-[#0a1f3d] text-[28px] sm:text-[36px] lg:text-[44px] leading-[1.35] tracking-[-0.01em] text-center max-w-4xl mx-auto">{children}</h2>;
 }
 function Highlight({ children, color = "#fbbf24" }: { children: React.ReactNode; color?: string }) {
-  return <span className="relative inline-block"><span className="relative z-10">{children}</span><span className="absolute left-0 right-0 bottom-0 h-2.5 -z-0 opacity-60" style={{ background: color }} /></span>;
+  return <span className="[box-decoration-break:clone] [-webkit-box-decoration-break:clone]" style={{ backgroundImage: `linear-gradient(${color}99, ${color}99)`, backgroundRepeat: "no-repeat", backgroundPosition: "0 100%", backgroundSize: "100% 0.625rem" }}>{children}</span>;
 }
 
 function FV() {
@@ -56,10 +57,11 @@ function FV() {
             <Ico d={I.star} size={14} className="text-[#fbbf24] fill-[#fbbf24]" />
             <span className="font-bold text-[12px] sm:text-[13px] text-[#15447b]">価格競争に疲れた経営者の方へ</span>
           </div>
-          <h1 className="font-black text-[#0a1f3d] leading-[1.3] tracking-[-0.01em] text-[22px] sm:text-[38px] lg:text-[42px] mb-5">
-            相見積もりで疲弊する前に、<br />
-            あなたの技術力を<br />
-            <Highlight color="#fbbf24">「選ばれる真価」</Highlight>に変えませんか。
+          <h1 className="font-black text-[#0a1f3d] leading-[1.3] tracking-[-0.01em] text-[20px] sm:text-[38px] lg:text-[42px] mb-5 [text-wrap:balance]">
+            <span className="inline-block">相見積もりで疲弊する前に、</span>
+            <span className="inline-block">あなたの技術力を</span>
+            <span className="inline-block"><Highlight color="#fbbf24">「選ばれる真価」</Highlight></span>
+            <span className="inline-block">に変えませんか。</span>
           </h1>
           <p className="text-[15px] sm:text-[16px] text-[#475569] leading-[1.9] mb-8">
             市場分析・ポジショニングから始まる戦略的ブランディングで、<br className="hidden sm:block" />
@@ -95,7 +97,7 @@ function FV() {
               <span className="text-[13px] text-[#64748b] mb-1">（税別）</span>
             </div>
             <ul className="space-y-2.5">
-              {["市場分析・競合分析・ポジショニング設計", "ブランドステートメント策定（必須）", "MVV（ミッション・ビジョン・バリュー）", "ロゴデザイン（3案）", "名刺デザイン（3案）", "HP制作（4-5P・撮影込み）", "営業用会社紹介資料（A4換算6-8P）"].map((f) => (
+              {["ブランドステートメント策定（市場分析・ポジショニング／必須）", "MVV策定（ミッション・ビジョン・バリュー）", "ロゴデザイン（3案）", "名刺デザイン（3案）", "HP制作（4-5P・撮影込み）", "営業用会社紹介資料（A4換算6-8P）"].map((f) => (
                 <li key={f} className="flex items-center gap-2.5 text-[13px] text-[#0a1f3d]">
                   <span className="shrink-0 w-5 h-5 bg-[#22c55e] rounded-full flex items-center justify-center"><Ico d={I.check} size={11} className="text-white" /></span>{f}
                 </li>
@@ -151,13 +153,13 @@ function Problem() {
     <section id="problem" className="relative py-16 sm:py-24 bg-white">
       <div className="max-w-[1280px] mx-auto px-4 sm:px-8">
         <Kicker jp="お悩み" en="PROBLEM" color="#dc2626" />
-        <SectionTitle>価格競争から抜け出せない。<Highlight color="#fecaca">その本当の原因</Highlight>は？</SectionTitle>
+        <SectionTitle>価格競争から抜け出せない。<span className="inline-block"><Highlight color="#fecaca">その本当の原因</Highlight>は？</span></SectionTitle>
         <p className="text-center text-[14px] sm:text-[15px] text-[#475569] mt-5 leading-[2] max-w-2xl mx-auto">
           技術力も対応力も十分なのに「なぜ選ばれないのか」。<br className="hidden sm:block" />その答えは、ブランドの設計にあります。
         </p>
-        <div className="mt-12 grid md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
+        <div className="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-4 sm:gap-5">
           {PROBLEMS.map((p, i) => (
-            <div key={i} className={`relative bg-[#f8fafc] border-2 border-[#e2e8f0] hover:border-[#15447b] hover:bg-white transition-all rounded-2xl p-6 group ${i === 4 ? "md:col-span-2 lg:col-span-3 lg:max-w-xl lg:mx-auto" : ""}`}>
+            <div key={i} className={`relative bg-[#f8fafc] border-2 border-[#e2e8f0] hover:border-[#15447b] hover:bg-white transition-all rounded-2xl p-6 group lg:col-span-2 ${i === 3 ? "lg:col-start-2" : ""} ${i === 4 ? "md:col-span-2 md:max-w-md md:mx-auto lg:col-start-4 lg:max-w-none lg:mx-0" : ""}`}>
               <div className="absolute -top-3 -left-3 w-9 h-9 bg-gradient-to-br from-[#15447b] to-[#0a1f3d] text-white rounded-full flex items-center justify-center font-mono font-black text-[14px] shadow-md">{String(i + 1).padStart(2, "0")}</div>
               <div className="flex items-start gap-4 pl-3">
                 <div className="w-12 h-12 bg-[#fef2f2] border border-[#fecaca] rounded-xl flex items-center justify-center text-[#dc2626] shrink-0"><Ico d={p.icon} size={22} /></div>
@@ -170,9 +172,9 @@ function Problem() {
           <div className="font-mono text-[10px] tracking-[0.3em] text-[#fbbf24] mb-3 font-bold">INSIGHT</div>
           <p className="text-white font-bold text-[18px] sm:text-[20px] leading-[1.6] mb-4">価格競争の本質は、「選ばれる理由」が言語化されていないことにあります。</p>
           <ul className="space-y-3 text-[13px] text-white/80 leading-[1.85]">
-            <li className="flex items-start gap-2"><span className="text-[#fbbf24] shrink-0 mt-1">▸</span><span>中小企業の約6割が「自社の強みを言語化できていない」と回答しており、それが相見積もり合戦の根本原因になっている</span></li>
-            <li className="flex items-start gap-2"><span className="text-[#fbbf24] shrink-0 mt-1">▸</span><span>ブランド戦略を整備した企業は、整備前と比べて受注単価が<strong className="text-white">平均1.4倍</strong>向上する傾向がある</span></li>
-            <li className="flex items-start gap-2"><span className="text-[#fbbf24] shrink-0 mt-1">▸</span><span>「なぜ弊社か」を論理的に伝えられるブランドステートメントは、商談の質と受注確率を同時に上げる最も効果的な投資</span></li>
+            <li className="flex items-start gap-2"><span className="text-[#fbbf24] shrink-0">▸</span><span>中小企業の約6割が「自社の強みを言語化できていない」と回答しており、それが相見積もり合戦の根本原因になっている</span></li>
+            <li className="flex items-start gap-2"><span className="text-[#fbbf24] shrink-0">▸</span><span>ブランド戦略を整備した企業は、整備前と比べて受注単価が<strong className="text-white">平均1.4倍</strong>向上する傾向がある</span></li>
+            <li className="flex items-start gap-2"><span className="text-[#fbbf24] shrink-0">▸</span><span>「なぜ弊社か」を論理的に伝えられるブランドステートメントは、商談の質と受注確率を同時に上げる最も効果的な投資</span></li>
           </ul>
         </div>
       </div>
@@ -228,7 +230,7 @@ function WhyUs() {
     <section id="why" className="relative py-16 sm:py-24 bg-white">
       <div className="max-w-[1280px] mx-auto px-4 sm:px-8">
         <Kicker jp="選ばれる理由" en="WHY US" color="#15447b" />
-        <SectionTitle>単なるリニューアルでなく、<Highlight>「選ばれる仕組み」</Highlight>を作ります</SectionTitle>
+        <SectionTitle>単なるリニューアルでなく、<span className="inline-block"><Highlight>「選ばれる仕組み」</Highlight></span><span className="inline-block">を作ります</span></SectionTitle>
         <div className="mt-12 grid md:grid-cols-2 gap-5">
           <div className="bg-[#f8fafc] border-2 border-[#e2e8f0] rounded-2xl p-7 sm:p-8">
             <div className="flex items-center gap-3 mb-6"><div className="w-10 h-10 bg-[#e2e8f0] rounded-full flex items-center justify-center"><Ico d={I.x} size={18} className="text-[#64748b]" /></div><h3 className="font-bold text-[#475569] text-[17px]">よくある「見た目だけ」のリニューアル</h3></div>
@@ -243,7 +245,7 @@ function WhyUs() {
             <ul className="space-y-4">
               {strengths.map((s) => (
                 <li key={s.n} className="flex items-start gap-3">
-                  <span className="shrink-0 font-black text-[#fbbf24] text-[14px] leading-none mt-0.5 w-5">{s.n}</span>
+                  <span className="shrink-0 font-black text-[#fbbf24] text-[14px] w-5 mt-[3px]">{s.n}</span>
                   <div><span className="font-bold text-white text-[14px]">{s.title}</span><p className="text-[12.5px] text-white/70 leading-[1.7] mt-0.5">{s.desc}</p></div>
                 </li>
               ))}
@@ -282,7 +284,7 @@ function Plans() {
               </div>
               <div>
                 <ul className="space-y-2.5 mb-7">
-                  {["市場分析・競合分析・ポジショニング設計", "ブランドステートメント策定", "MVV（ミッション・ビジョン・バリュー）策定", "ロゴデザイン（3案・バリエーション含む）", "名刺デザイン（3案・表面/裏面）", "HP制作（4-5P・撮影込み）", "会社紹介資料（A4換算6-8P）"].map((f) => (
+                  {["ブランドステートメント策定（市場分析・ポジショニング）", "MVV（ミッション・ビジョン・バリュー）策定", "ロゴデザイン（3案・バリエーション含む）", "名刺デザイン（3案・表面/裏面）", "HP制作（4-5P・撮影込み）", "会社紹介資料（A4換算6-8P）"].map((f) => (
                     <li key={f} className="flex items-center gap-2.5 text-[13px] text-[#0a1f3d]">
                       <span className="shrink-0 w-5 h-5 bg-[#22c55e] rounded-full flex items-center justify-center"><Ico d={I.check} size={11} className="text-white" /></span>{f}
                     </li>
@@ -294,6 +296,12 @@ function Plans() {
                 </a>
               </div>
             </div>
+          </div>
+          <div className="mt-8 bg-gradient-to-br from-[#fef9c3] to-[#fff7e6] border-2 border-[#fbbf24] rounded-2xl p-6 sm:p-8 max-w-3xl mx-auto text-center">
+            <div className="font-black text-[#0a1f3d] text-[18px] mb-2">ご契約特典</div>
+            <p className="text-[13px] text-[#475569] leading-[1.85]">
+              生成AI（ChatGPT・Claude）業務活用カリキュラムを<span className="font-bold text-[#dc2626]">無料視聴</span>。<br />ご契約者様限定のオンライン講座で、AI活用ノウハウを体系的に学べます。
+            </p>
           </div>
         </div>
         <div className="mt-16">
@@ -372,7 +380,7 @@ const FAQS = [
 ];
 
 function FAQ() {
-  const [open, setOpen] = useState(0);
+  const [open, setOpen] = useState<Set<number>>(new Set([0]));
   return (
     <section id="faq" className="relative py-16 sm:py-24 bg-gradient-to-b from-[#f0f6fc] to-[#e0f2fe]">
       <div className="max-w-[900px] mx-auto px-4 sm:px-8">
@@ -380,10 +388,10 @@ function FAQ() {
         <SectionTitle>気になる<Highlight>ご質問</Highlight></SectionTitle>
         <div className="mt-10 space-y-3">
           {FAQS.map((f, i) => {
-            const isOpen = open === i;
+            const isOpen = open.has(i);
             return (
               <div key={i} className={`bg-white rounded-2xl border-2 transition-all ${isOpen ? "border-[#15447b] shadow-lg" : "border-[#e2e8f0] hover:border-[#15447b]/40"}`}>
-                <button onClick={() => setOpen(isOpen ? -1 : i)} className="w-full text-left flex items-start justify-between gap-4 p-5 sm:p-6">
+                <button onClick={() => setOpen(prev => { const next = new Set(prev); if (next.has(i)) next.delete(i); else next.add(i); return next; })} className="w-full text-left flex items-start justify-between gap-4 p-5 sm:p-6">
                   <div className="flex items-start gap-4 flex-1">
                     <span className="shrink-0 w-9 h-9 bg-[#dc2626] text-white rounded-full flex items-center justify-center font-black text-[14px]">Q</span>
                     <span className="font-bold text-[#0a1f3d] text-[15px] sm:text-[16px] leading-[1.6] pt-1">{f.q}</span>
@@ -406,7 +414,14 @@ function FAQ() {
 
 function CTA() {
   const seats = getAvailableSeats();
-  function handleSubmit() { trackEvent("generate_lead", { event_category: "lp_brand_value", event_label: "contact_form_submit" }); }
+  const [submitting, setSubmitting] = useState(false);
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    if (submitting) return;
+    trackEvent("generate_lead", { event_category: "lp_brand_value", event_label: "contact_form_submit" });
+    setSubmitting(true);
+    await submitContactForm(e.currentTarget, "brand-value");
+  }
   return (
     <section id="cta" className="relative py-16 sm:py-24 bg-gradient-to-br from-[#15447b] via-[#0a1f3d] to-[#060d1c] overflow-hidden">
       <div className="absolute inset-0 opacity-15" style={{ backgroundImage: "radial-gradient(circle at 20% 30%, rgba(251,191,36,0.4), transparent 40%), radial-gradient(circle at 80% 70%, rgba(21,68,123,0.5), transparent 40%)" }} />
@@ -417,7 +432,7 @@ function CTA() {
           <p className="mt-4 text-[14px] text-white/75 leading-[1.95]">2営業日以内にご返信いたします。売り込みは一切ありません。</p>
         </div>
         <div className="bg-white rounded-3xl p-7 sm:p-10 shadow-2xl">
-          <form action="https://formsubmit.co/info@gdesign-partners.co.jp" method="POST" onSubmit={handleSubmit} className="space-y-5">
+          <form onSubmit={handleSubmit} className="space-y-5">
             <input type="hidden" name="_subject" value="【LP-B・価格競争脱却】無料相談お申込み" />
             <input type="hidden" name="_next" value="https://gdesign-partners.co.jp/lp/brand-value/thanks" />
             <input type="hidden" name="_captcha" value="false" />
@@ -428,7 +443,7 @@ function CTA() {
             <div><label className="flex items-center gap-1.5 mb-1.5"><span className="font-bold text-[12px] text-[#0a1f3d]">メールアドレス</span><span className="text-[10px] text-white bg-[#dc2626] px-1.5 py-0.5 rounded font-bold">必須</span></label><input name="email" type="email" required placeholder="name@company.co.jp" className="w-full bg-white border-2 border-[#e2e8f0] focus:border-[#15447b] text-[#0a1f3d] px-4 h-12 text-[14px] outline-none transition placeholder:text-[#94a3b8] rounded-xl" /></div>
             <div><label className="block font-bold text-[12px] text-[#0a1f3d] mb-1.5">現在の最大の課題（近いものを選択）</label><select name="main_issue" className="w-full bg-white border-2 border-[#e2e8f0] focus:border-[#15447b] text-[#0a1f3d] px-4 h-12 text-[14px] outline-none transition rounded-xl"><option value="">選択してください</option><option value="相見積もりで価格競争が続いている">相見積もりで価格競争が続いている</option><option value="自社の強みをうまく説明できない">自社の強みをうまく説明できない</option><option value="ブランドツールが古く見劣りしている">ブランドツールが古く見劣りしている</option><option value="新規受注の質を上げたい">新規受注の質（単価・案件規模）を上げたい</option></select></div>
             <div><label className="block font-bold text-[12px] text-[#0a1f3d] mb-1.5">現状の課題・ご相談内容</label><textarea name="challenge" rows={4} placeholder="例：技術力には自信があるが、いつも最安値での受注になってしまう。大手企業との商談で信頼感が出せていないと感じている..." className="w-full bg-white border-2 border-[#e2e8f0] focus:border-[#15447b] text-[#0a1f3d] px-4 py-3 text-[14px] outline-none transition placeholder:text-[#94a3b8] resize-none rounded-xl" /></div>
-            <button type="submit" className="w-full h-14 bg-gradient-to-b from-[#fbbf24] to-[#c9a227] hover:from-[#f0d87a] hover:to-[#fbbf24] text-[#0a1f3d] font-black text-[16px] rounded-full shadow-[0_6px_0_#92760e,0_8px_24px_rgba(201,162,39,0.4)] hover:shadow-[0_3px_0_#92760e] hover:translate-y-[3px] transition-all flex items-center justify-center gap-3 mt-2">無料相談を申し込む<Ico d={I.arrow} size={18} /></button>
+            <button type="submit" disabled={submitting} className="w-full h-14 bg-gradient-to-b from-[#fbbf24] to-[#c9a227] hover:from-[#f0d87a] hover:to-[#fbbf24] text-[#0a1f3d] font-black text-[16px] rounded-full shadow-[0_6px_0_#92760e,0_8px_24px_rgba(201,162,39,0.4)] hover:shadow-[0_3px_0_#92760e] hover:translate-y-[3px] transition-all flex items-center justify-center gap-3 mt-2 disabled:opacity-60 disabled:cursor-not-allowed">{submitting ? "送信中…" : <>無料相談を申し込む<Ico d={I.arrow} size={18} /></>}</button>
             <p className="text-[11px] text-[#94a3b8] text-center">送信後、2営業日以内にご連絡します</p>
           </form>
         </div>

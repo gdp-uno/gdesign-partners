@@ -9,9 +9,9 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v5
         with:
           node-version: '20'
           cache: 'npm'
@@ -31,6 +31,7 @@ jobs:
           script: |
             cd /var/www/company-lp/staging
             git pull origin develop || (git clone https://github.com/gdp-uno/company-lp.git . && git checkout develop)
+            printf 'BASIC_AUTH_ENABLED=true\nSTAGING_MODE=true\n' > .env.local
             npm ci --production=false
             npm run build
             pm2 describe company-lp-staging > /dev/null 2>&1 \

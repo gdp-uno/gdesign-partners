@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { submitContactForm } from "@/lib/contact";
 
 declare global {
   interface Window { gtag?: (...args: unknown[]) => void; }
@@ -59,9 +60,16 @@ function SectionTitle({ children }: { children: React.ReactNode }) {
 }
 function Highlight({ children, color = "#fbbf24" }: { children: React.ReactNode; color?: string }) {
   return (
-    <span className="relative inline-block">
-      <span className="relative z-10">{children}</span>
-      <span className="absolute left-0 right-0 bottom-0 h-2.5 -z-0 opacity-60" style={{ background: color }} />
+    <span
+      className="[box-decoration-break:clone] [-webkit-box-decoration-break:clone]"
+      style={{
+        backgroundImage: `linear-gradient(${color}99, ${color}99)`,
+        backgroundRepeat: "no-repeat",
+        backgroundPosition: "0 100%",
+        backgroundSize: "100% 0.625rem",
+      }}
+    >
+      {children}
     </span>
   );
 }
@@ -606,8 +614,13 @@ function FAQ() {
 
 // ── CTA ───────────────────────────────────────────────────────────────
 function CTA() {
-  function handleSubmit() {
+  const [submitting, setSubmitting] = useState(false);
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    if (submitting) return;
     trackEvent("generate_lead", { event_category: "lp_elearning", event_label: "contact_form_submit" });
+    setSubmitting(true);
+    await submitContactForm(e.currentTarget, "elearning");
   }
   return (
     <section id="cta" className="relative py-16 sm:py-24 bg-gradient-to-br from-[#0a1f3d] via-[#15447b] to-[#1e5fa8] overflow-hidden">
@@ -627,8 +640,6 @@ function CTA() {
         </div>
         <div className="bg-white rounded-3xl p-7 sm:p-10 shadow-2xl">
           <form
-            action="https://formsubmit.co/info@gdesign-partners.co.jp"
-            method="POST"
             onSubmit={handleSubmit}
             className="space-y-5"
           >
@@ -685,10 +696,9 @@ function CTA() {
                 className="w-full bg-white border-2 border-[#e2e8f0] focus:border-[#15447b] text-[#0a1f3d] px-4 py-3 text-[14px] outline-none transition placeholder:text-[#94a3b8] resize-none rounded-xl" />
             </div>
 
-            <button type="submit"
-              className="w-full h-14 bg-gradient-to-b from-[#fbbf24] to-[#c9a227] hover:from-[#f0d87a] hover:to-[#fbbf24] text-[#0a1f3d] font-black text-[16px] rounded-full shadow-[0_6px_0_#92760e,0_8px_24px_rgba(201,162,39,0.4)] hover:shadow-[0_3px_0_#92760e,0_4px_12px_rgba(201,162,39,0.4)] hover:translate-y-[3px] transition-all flex items-center justify-center gap-3 mt-2">
-              無料で資料請求・お申込み
-              <Ico d={I.arrow} size={18} />
+            <button type="submit" disabled={submitting}
+              className="w-full h-14 bg-gradient-to-b from-[#fbbf24] to-[#c9a227] hover:from-[#f0d87a] hover:to-[#fbbf24] text-[#0a1f3d] font-black text-[16px] rounded-full shadow-[0_6px_0_#92760e,0_8px_24px_rgba(201,162,39,0.4)] hover:shadow-[0_3px_0_#92760e,0_4px_12px_rgba(201,162,39,0.4)] hover:translate-y-[3px] transition-all flex items-center justify-center gap-3 mt-2 disabled:opacity-60 disabled:cursor-not-allowed">
+              {submitting ? "送信中…" : <>無料で資料請求・お申込み<Ico d={I.arrow} size={18} /></>}
             </button>
             <p className="text-[11px] text-[#94a3b8] text-center">送信後、2営業日以内にご連絡します</p>
           </form>

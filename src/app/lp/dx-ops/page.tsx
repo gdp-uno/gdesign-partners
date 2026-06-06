@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { submitContactForm } from "@/lib/contact";
 import { useScrollTracking } from "@/lib/useScrollTracking";
 import { getAvailableSeats } from "@/lib/seats";
 
@@ -45,7 +46,7 @@ function SectionTitle({ children }: { children: React.ReactNode }) {
   return <h2 className="font-black text-[#0a1f3d] text-[28px] sm:text-[36px] lg:text-[44px] leading-[1.35] tracking-[-0.01em] text-center max-w-4xl mx-auto">{children}</h2>;
 }
 function Highlight({ children, color = "#fbbf24" }: { children: React.ReactNode; color?: string }) {
-  return <span className="relative inline-block"><span className="relative z-10">{children}</span><span className="absolute left-0 right-0 bottom-0 h-2.5 -z-0 opacity-60" style={{ background: color }} /></span>;
+  return <span className="[box-decoration-break:clone] [-webkit-box-decoration-break:clone]" style={{ backgroundImage: `linear-gradient(${color}99, ${color}99)`, backgroundRepeat: "no-repeat", backgroundPosition: "0 100%", backgroundSize: "100% 0.625rem" }}>{children}</span>;
 }
 
 function FV() {
@@ -337,7 +338,13 @@ function Plans() {
             ))}
           </div>
         </div>
-        <p className="mt-8 text-center text-[11px] text-[#64748b]">※ 表示価格はすべて税抜。スポットプランは着手前に50%前払い。サブスクは最低3ヶ月契約（以降1ヶ月単位で更新）</p>
+        <div className="mt-8 bg-gradient-to-br from-[#fef9c3] to-[#fff7e6] border-2 border-[#fbbf24] rounded-2xl p-6 sm:p-8 max-w-3xl mx-auto text-center">
+          <div className="font-black text-[#0a1f3d] text-[18px] mb-2">ご契約特典</div>
+          <p className="text-[13px] text-[#475569] leading-[1.85]">
+            生成AI活用カリキュラムを<span className="font-bold text-[#dc2626]">無料視聴</span>。<br />ChatGPT・Claude などの業務活用ノウハウを体系的に学べるオンライン講座を、ご契約者様限定でご覧いただけます。
+          </p>
+        </div>
+        <p className="mt-8 text-center text-[11px] text-[#64748b]">※ 表示価格はすべて税抜。スポットプランは着手前に50%前払い。サブスクはスタンダード以上が最低3ヶ月（ライトは契約期間なし）／以降1ヶ月単位で更新</p>
       </div>
     </section>
   );
@@ -422,7 +429,14 @@ function FAQ() {
 
 function CTA() {
   const seats = getAvailableSeats();
-  function handleSubmit() { trackEvent("generate_lead", { event_category: "lp_dx_ops", event_label: "contact_form_submit" }); }
+  const [submitting, setSubmitting] = useState(false);
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    if (submitting) return;
+    trackEvent("generate_lead", { event_category: "lp_dx_ops", event_label: "contact_form_submit" });
+    setSubmitting(true);
+    await submitContactForm(e.currentTarget, "dx-ops");
+  }
   return (
     <section id="cta" className="relative py-16 sm:py-24 bg-gradient-to-br from-[#060d1c] via-[#0a1f3d] to-[#060d1c] overflow-hidden">
       <div className="absolute inset-0 opacity-20" style={{ backgroundImage: "radial-gradient(circle at 20% 30%, rgba(99,102,241,0.4), transparent 40%), radial-gradient(circle at 80% 70%, rgba(251,191,36,0.3), transparent 40%)" }} />
@@ -433,7 +447,7 @@ function CTA() {
           <p className="mt-4 text-[14px] text-white/75 leading-[1.95]">バックオフィスのボトルネックをヒアリングし、自動化ロードマップと費用感をその場でご提示します。</p>
         </div>
         <div className="bg-white rounded-3xl p-7 sm:p-10 shadow-2xl">
-          <form action="https://formsubmit.co/info@gdesign-partners.co.jp" method="POST" onSubmit={handleSubmit} className="space-y-5">
+          <form onSubmit={handleSubmit} className="space-y-5">
             <input type="hidden" name="_subject" value="【LP-F・スタートアップDX】無料相談お申込み" />
             <input type="hidden" name="_next" value="https://gdesign-partners.co.jp/lp/dx-ops/thanks" />
             <input type="hidden" name="_captcha" value="false" />
@@ -444,7 +458,7 @@ function CTA() {
             <div><label className="flex items-center gap-1.5 mb-1.5"><span className="font-bold text-[12px] text-[#0a1f3d]">メールアドレス</span><span className="text-[10px] text-white bg-[#dc2626] px-1.5 py-0.5 rounded font-bold">必須</span></label><input name="email" type="email" required placeholder="name@company.co.jp" className="w-full bg-white border-2 border-[#e2e8f0] focus:border-[#15447b] text-[#0a1f3d] px-4 h-12 text-[14px] outline-none transition placeholder:text-[#94a3b8] rounded-xl" /></div>
             <div><label className="block font-bold text-[12px] text-[#0a1f3d] mb-1.5">最も解消したいボトルネック（近いものを選択）</label><select name="main_issue" className="w-full bg-white border-2 border-[#e2e8f0] focus:border-[#15447b] text-[#0a1f3d] px-4 h-12 text-[14px] outline-none transition rounded-xl"><option value="">選択してください</option><option value="エンジニアがバックオフィス業務に時間を取られている">エンジニアがバックオフィス業務に時間を取られている</option><option value="SaaS間のデータ連携が手動になっている">SaaS間のデータ連携・コピペ作業が多い</option><option value="採用・経費・請求などの管理業務が属人化している">採用・経費・請求管理が属人化・手動になっている</option><option value="レポート作成・データ集計に時間がかかっている">レポート作成・データ集計に毎週時間がかかっている</option><option value="オペレーション全体を整理・自動化したい">オペレーション全体を整理・自動化したい</option></select></div>
             <div><label className="block font-bold text-[12px] text-[#0a1f3d] mb-1.5">現在の状況・相談したいこと</label><textarea name="challenge" rows={4} placeholder="例：Series Aを終えてメンバーが増えたが、経費精算・請求業務・採用管理がすべて手動のまま。エンジニアに頼みたいが、プロダクト開発で手一杯..." className="w-full bg-white border-2 border-[#e2e8f0] focus:border-[#15447b] text-[#0a1f3d] px-4 py-3 text-[14px] outline-none transition placeholder:text-[#94a3b8] resize-none rounded-xl" /></div>
-            <button type="submit" className="w-full h-14 bg-gradient-to-b from-[#fbbf24] to-[#c9a227] hover:from-[#f0d87a] hover:to-[#fbbf24] text-[#0a1f3d] font-black text-[16px] rounded-full shadow-[0_6px_0_#92760e,0_8px_24px_rgba(201,162,39,0.4)] hover:shadow-[0_3px_0_#92760e] hover:translate-y-[3px] transition-all flex items-center justify-center gap-3 mt-2">無料相談を申し込む<Ico d={I.arrow} size={18} /></button>
+            <button type="submit" disabled={submitting} className="w-full h-14 bg-gradient-to-b from-[#fbbf24] to-[#c9a227] hover:from-[#f0d87a] hover:to-[#fbbf24] text-[#0a1f3d] font-black text-[16px] rounded-full shadow-[0_6px_0_#92760e,0_8px_24px_rgba(201,162,39,0.4)] hover:shadow-[0_3px_0_#92760e] hover:translate-y-[3px] transition-all flex items-center justify-center gap-3 mt-2 disabled:opacity-60 disabled:cursor-not-allowed">{submitting ? "送信中…" : <>無料相談を申し込む<Ico d={I.arrow} size={18} /></>}</button>
             <p className="text-[11px] text-[#94a3b8] text-center">送信後、2営業日以内にご連絡します</p>
           </form>
         </div>

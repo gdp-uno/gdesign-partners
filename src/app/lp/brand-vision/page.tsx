@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { submitContactForm } from "@/lib/contact";
 import { useScrollTracking } from "@/lib/useScrollTracking";
 import { getAvailableSeats } from "@/lib/seats";
 
@@ -41,7 +42,7 @@ function SectionTitle({ children }: { children: React.ReactNode }) {
   return <h2 className="font-black text-[#0a1f3d] text-[28px] sm:text-[36px] lg:text-[44px] leading-[1.35] tracking-[-0.01em] text-center max-w-4xl mx-auto">{children}</h2>;
 }
 function Highlight({ children, color = "#fbbf24" }: { children: React.ReactNode; color?: string }) {
-  return <span className="relative inline-block"><span className="relative z-10">{children}</span><span className="absolute left-0 right-0 bottom-0 h-2.5 -z-0 opacity-60" style={{ background: color }} /></span>;
+  return <span className="[box-decoration-break:clone] [-webkit-box-decoration-break:clone]" style={{ backgroundImage: `linear-gradient(${color}99, ${color}99)`, backgroundRepeat: "no-repeat", backgroundPosition: "0 100%", backgroundSize: "100% 0.625rem" }}>{children}</span>;
 }
 
 function FV() {
@@ -58,10 +59,11 @@ function FV() {
             <Ico d={I.heart} size={14} className="text-[#a855f7] fill-[#a855f7]" />
             <span className="font-bold text-[12px] sm:text-[13px] text-[#15447b]">理念はあるが言語化できていない方へ</span>
           </div>
-          <h1 className="font-black text-[#0a1f3d] leading-[1.3] tracking-[-0.01em] text-[20px] sm:text-[38px] lg:text-[42px] mb-5">
-            頭の中にある熱い想いを、<br />
-            ターゲットに届く<br />
-            <Highlight color="#e9d5ff">ブランドストーリー</Highlight>に翻訳します。
+          <h1 className="font-black text-[#0a1f3d] leading-[1.3] tracking-[-0.01em] text-[20px] sm:text-[38px] lg:text-[42px] mb-5 [text-wrap:balance]">
+            <span className="inline-block">頭の中にある熱い想いを、</span>
+            <span className="inline-block">ターゲットに届く</span>
+            <span className="inline-block"><Highlight color="#e9d5ff">ブランドストーリー</Highlight></span>
+            <span className="inline-block">に翻訳します。</span>
           </h1>
           <p className="text-[15px] sm:text-[16px] text-[#475569] leading-[1.9] mb-8">
             MVV策定から始める、想いが伝わるブランドを一緒につくります。<br className="hidden sm:block" />
@@ -97,7 +99,7 @@ function FV() {
               <span className="text-[13px] text-[#64748b] mb-1">（税別）</span>
             </div>
             <ul className="space-y-2.5">
-              {["MVV（ミッション・ビジョン・バリュー）策定", "ブランドステートメント策定（必須）", "ブランドストーリー・コンセプト設計", "ロゴデザイン（3案）", "名刺デザイン（3案）", "HP制作（4-5P・撮影込み）", "営業用会社紹介資料（A4換算6-8P）"].map((f) => (
+              {["MVV（ミッション・ビジョン・バリュー）策定", "ブランドステートメント策定（必須）", "ロゴデザイン（3案）", "名刺デザイン（3案）", "HP制作（4-5P・撮影込み）", "営業用会社紹介資料（A4換算6-8P）"].map((f) => (
                 <li key={f} className="flex items-center gap-2.5 text-[13px] text-[#0a1f3d]">
                   <span className="shrink-0 w-5 h-5 bg-[#22c55e] rounded-full flex items-center justify-center"><Ico d={I.check} size={11} className="text-white" /></span>{f}
                 </li>
@@ -153,13 +155,13 @@ function Problem() {
     <section id="problem" className="relative py-16 sm:py-24 bg-white">
       <div className="max-w-[1280px] mx-auto px-4 sm:px-8">
         <Kicker jp="お悩み" en="PROBLEM" color="#dc2626" />
-        <SectionTitle>想いはある。でも<Highlight color="#fecaca">言葉にならない</Highlight>のはなぜか？</SectionTitle>
+        <SectionTitle>想いはある。<br />でも<span className="inline-block"><Highlight color="#fecaca">言葉にならない</Highlight></span><span className="inline-block">のはなぜか？</span></SectionTitle>
         <p className="text-center text-[14px] sm:text-[15px] text-[#475569] mt-5 leading-[2] max-w-2xl mx-auto">
           ブランディングで一番難しいのは「自分ごと」の言語化です。<br className="hidden sm:block" />近すぎて見えない、を一緒に解決します。
         </p>
-        <div className="mt-12 grid md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
+        <div className="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-4 sm:gap-5">
           {PROBLEMS.map((p, i) => (
-            <div key={i} className={`relative bg-[#f8fafc] border-2 border-[#e2e8f0] hover:border-[#15447b] hover:bg-white transition-all rounded-2xl p-6 group ${i === 4 ? "md:col-span-2 lg:col-span-3 lg:max-w-xl lg:mx-auto" : ""}`}>
+            <div key={i} className={`relative bg-[#f8fafc] border-2 border-[#e2e8f0] hover:border-[#15447b] hover:bg-white transition-all rounded-2xl p-6 group lg:col-span-2 ${i === 3 ? "lg:col-start-2" : ""} ${i === 4 ? "md:col-span-2 md:max-w-md md:mx-auto lg:col-start-4 lg:max-w-none lg:mx-0" : ""}`}>
               <div className="absolute -top-3 -left-3 w-9 h-9 bg-gradient-to-br from-[#15447b] to-[#0a1f3d] text-white rounded-full flex items-center justify-center font-mono font-black text-[14px] shadow-md">{String(i + 1).padStart(2, "0")}</div>
               <div className="flex items-start gap-4 pl-3">
                 <div className="w-12 h-12 bg-[#fdf4ff] border border-[#e9d5ff] rounded-xl flex items-center justify-center text-[#7c3aed] shrink-0"><Ico d={p.icon} size={22} /></div>
@@ -172,9 +174,9 @@ function Problem() {
           <div className="font-mono text-[10px] tracking-[0.3em] text-[#fbbf24] mb-3 font-bold">INSIGHT</div>
           <p className="text-white font-bold text-[18px] sm:text-[20px] leading-[1.6] mb-4">想いの言語化は「見つける」作業ではなく、「翻訳する」作業です。</p>
           <ul className="space-y-3 text-[13px] text-white/80 leading-[1.85]">
-            <li className="flex items-start gap-2"><span className="text-[#fbbf24] shrink-0 mt-1">▸</span><span>ブランドの核になる「想い」はすでにあなたの中に存在している。それを第三者の視点で引き出し、ターゲットが理解できる言葉に翻訳するのが専門家の仕事</span></li>
-            <li className="flex items-start gap-2"><span className="text-[#fbbf24] shrink-0 mt-1">▸</span><span>MVVが空虚になる理由の9割は「フレームワーク先行」。まず経営者の言葉でストーリーを描き、そこからMVVを抽出する順序が正しい</span></li>
-            <li className="flex items-start gap-2"><span className="text-[#fbbf24] shrink-0 mt-1">▸</span><span>「想い」が届くブランドは、デザイン以前に言語設計で決まる。一貫したブランドストーリーを持つ企業は<strong className="text-white">顧客ロイヤルティが平均1.5〜2倍</strong>になる傾向</span></li>
+            <li className="flex items-start gap-2"><span className="text-[#fbbf24] shrink-0">▸</span><span>ブランドの核になる「想い」はすでにあなたの中に存在している。それを第三者の視点で引き出し、ターゲットが理解できる言葉に翻訳するのが専門家の仕事</span></li>
+            <li className="flex items-start gap-2"><span className="text-[#fbbf24] shrink-0">▸</span><span>MVVが空虚になる理由の9割は「フレームワーク先行」。まず経営者の言葉でストーリーを描き、そこからMVVを抽出する順序が正しい</span></li>
+            <li className="flex items-start gap-2"><span className="text-[#fbbf24] shrink-0">▸</span><span>「想い」が届くブランドは、デザイン以前に言語設計で決まる。一貫したブランドストーリーを持つ企業は<strong className="text-white">顧客ロイヤルティが平均1.5〜2倍</strong>になる傾向</span></li>
           </ul>
         </div>
       </div>
@@ -223,7 +225,7 @@ function WhyUs() {
   const strengths = [
     { n: "①", title: "「引き出す」技術を持つ", desc: "経営者本人が言語化できない「想い」を、構造化インタビューで引き出す。ブランドの核心を発見するセッションが最大の差別化です。" },
     { n: "②", title: "ストーリーから逆算した設計", desc: "MVVやブランドストーリーが決まってからデザインに入るため、「なぜこのデザインなのか」を説明できるブランドになります。" },
-    { n: "③", title: "言葉とビジュアルを一人格で管理", desc: "コピーライティング・デザイン・戦略設計を一人格で担当。「言葉とデザインがバラバラ」という問題が起きません。" },
+    { n: "③", title: "言葉とビジュアルを一つの統一された視点で管理", desc: "コピーライティング・デザイン・戦略設計を一つの統一された視点で担当。「言葉とデザインがバラバラ」という問題が起きません。" },
     { n: "④", title: "「届く」言語化のプロ", desc: "想いを内輪の言葉のままにせず、ターゲットの価値観・悩み・言語感覚に翻訳するコピーライティングが強みです。" },
   ];
   return (
@@ -245,7 +247,7 @@ function WhyUs() {
             <ul className="space-y-4">
               {strengths.map((s) => (
                 <li key={s.n} className="flex items-start gap-3">
-                  <span className="shrink-0 font-black text-[#fbbf24] text-[14px] leading-none mt-0.5 w-5">{s.n}</span>
+                  <span className="shrink-0 font-black text-[#fbbf24] text-[14px] w-5 mt-[3px]">{s.n}</span>
                   <div><span className="font-bold text-white text-[14px]">{s.title}</span><p className="text-[12.5px] text-white/70 leading-[1.7] mt-0.5">{s.desc}</p></div>
                 </li>
               ))}
@@ -259,8 +261,8 @@ function WhyUs() {
 
 function Plans() {
   const monthly = [
-    { code: "LIGHT", name: "ライトサポート", price: "50,000", items: ["月次ブランド面談（60分）", "メール相談 無制限", "HP軽微更新（月1回）", "SNS投稿文のレビュー（月3件）"] },
-    { code: "PRO", name: "プロサポート", price: "100,000", items: ["月次ブランド面談（月2回）", "メール相談 無制限", "HP更新（月2回）", "SNS投稿制作（月3枚）", "コンテンツ企画サポート"], featured: true },
+    { code: "LIGHT", name: "ライトサポート", price: "50,000", items: ["月次戦略面談（月1回・60分）", "メール相談 無制限", "HP軽微更新（月1回・1時間以内）", "営業ツール添削（月3件：SNS投稿文・営業メール・提案書）", "業務効率化ワンポイントアドバイス", "簡易月次レポート（A4 1枚）"] },
+    { code: "PRO", name: "プロサポート", price: "100,000", items: ["月次戦略面談（月2回）", "メール相談 無制限", "HP軽微更新（月2回・3時間以内）", "SNS投稿制作（月3枚）", "新規営業リスト作成（月50件）", "営業スクリプト月次改善", "業務効率化ワンポイントアドバイス", "簡易月次レポート（A4 2枚）"], featured: true },
   ];
   return (
     <section id="plans" className="relative py-16 sm:py-24 bg-gradient-to-b from-[#fdf4ff] to-[#f5f0fb]">
@@ -284,7 +286,7 @@ function Plans() {
               </div>
               <div>
                 <ul className="space-y-2.5 mb-7">
-                  {["MVV（ミッション・ビジョン・バリュー）策定", "ブランドストーリー・コンセプト設計", "ブランドステートメント策定", "ロゴデザイン（3案・バリエーション含む）", "名刺デザイン（3案・表面/裏面）", "HP制作（4-5P・撮影込み）", "会社紹介資料（A4換算6-8P）"].map((f) => (
+                  {["MVV（ミッション・ビジョン・バリュー）策定", "ブランドステートメント策定", "ロゴデザイン（3案・バリエーション含む）", "名刺デザイン（3案・表面/裏面）", "HP制作（4-5P・撮影込み）", "会社紹介資料（A4換算6-8P）"].map((f) => (
                     <li key={f} className="flex items-center gap-2.5 text-[13px] text-[#0a1f3d]">
                       <span className="shrink-0 w-5 h-5 bg-[#22c55e] rounded-full flex items-center justify-center"><Ico d={I.check} size={11} className="text-white" /></span>{f}
                     </li>
@@ -296,6 +298,12 @@ function Plans() {
                 </a>
               </div>
             </div>
+          </div>
+          <div className="mt-8 bg-gradient-to-br from-[#fef9c3] to-[#fff7e6] border-2 border-[#fbbf24] rounded-2xl p-6 sm:p-8 max-w-3xl mx-auto text-center">
+            <div className="font-black text-[#0a1f3d] text-[18px] mb-2">ご契約特典</div>
+            <p className="text-[13px] text-[#475569] leading-[1.85]">
+              生成AI（ChatGPT・Claude）業務活用カリキュラムを<span className="font-bold text-[#dc2626]">無料視聴</span>。<br />ご契約者様限定のオンライン講座で、AI活用ノウハウを体系的に学べます。
+            </p>
           </div>
         </div>
         <div className="mt-16">
@@ -408,7 +416,14 @@ function FAQ() {
 
 function CTA() {
   const seats = getAvailableSeats();
-  function handleSubmit() { trackEvent("generate_lead", { event_category: "lp_brand_vision", event_label: "contact_form_submit" }); }
+  const [submitting, setSubmitting] = useState(false);
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    if (submitting) return;
+    trackEvent("generate_lead", { event_category: "lp_brand_vision", event_label: "contact_form_submit" });
+    setSubmitting(true);
+    await submitContactForm(e.currentTarget, "brand-vision");
+  }
   return (
     <section id="cta" className="relative py-16 sm:py-24 bg-gradient-to-br from-[#15447b] via-[#0a1f3d] to-[#060d1c] overflow-hidden">
       <div className="absolute inset-0 opacity-15" style={{ backgroundImage: "radial-gradient(circle at 20% 30%, rgba(251,191,36,0.4), transparent 40%), radial-gradient(circle at 80% 70%, rgba(124,58,237,0.4), transparent 40%)" }} />
@@ -419,7 +434,7 @@ function CTA() {
           <p className="mt-4 text-[14px] text-white/75 leading-[1.95]">2営業日以内にご返信いたします。売り込みは一切ありません。</p>
         </div>
         <div className="bg-white rounded-3xl p-7 sm:p-10 shadow-2xl">
-          <form action="https://formsubmit.co/info@gdesign-partners.co.jp" method="POST" onSubmit={handleSubmit} className="space-y-5">
+          <form onSubmit={handleSubmit} className="space-y-5">
             <input type="hidden" name="_subject" value="【LP-C・理念ブランディング】無料相談お申込み" />
             <input type="hidden" name="_next" value="https://gdesign-partners.co.jp/lp/brand-vision/thanks" />
             <input type="hidden" name="_captcha" value="false" />
@@ -430,7 +445,7 @@ function CTA() {
             <div><label className="flex items-center gap-1.5 mb-1.5"><span className="font-bold text-[12px] text-[#0a1f3d]">メールアドレス</span><span className="text-[10px] text-white bg-[#dc2626] px-1.5 py-0.5 rounded font-bold">必須</span></label><input name="email" type="email" required placeholder="name@company.co.jp" className="w-full bg-white border-2 border-[#e2e8f0] focus:border-[#15447b] text-[#0a1f3d] px-4 h-12 text-[14px] outline-none transition placeholder:text-[#94a3b8] rounded-xl" /></div>
             <div><label className="block font-bold text-[12px] text-[#0a1f3d] mb-1.5">現在の最大の課題（近いものを選択）</label><select name="main_issue" className="w-full bg-white border-2 border-[#e2e8f0] focus:border-[#15447b] text-[#0a1f3d] px-4 h-12 text-[14px] outline-none transition rounded-xl"><option value="">選択してください</option><option value="想いや理念を言葉にできない">想いや理念をうまく言葉にできない</option><option value="MVVを作りたいが空虚な言葉になってしまう">MVVを作りたいが空虚な言葉になってしまう</option><option value="ブランドの独自性を表現できていない">ブランドの独自性・世界観をうまく表現できていない</option><option value="ターゲットに想いが届いていない感覚がある">ターゲットに想いが届いていない感覚がある</option></select></div>
             <div><label className="block font-bold text-[12px] text-[#0a1f3d] mb-1.5">伝えたい想い・ご相談内容</label><textarea name="challenge" rows={4} placeholder="例：「なぜこの事業をやっているのか」という想いはあるが、いざ言葉にしようとすると漠然としてしまい、HPやSNSで何を発信すればいいか分からなくなっている..." className="w-full bg-white border-2 border-[#e2e8f0] focus:border-[#15447b] text-[#0a1f3d] px-4 py-3 text-[14px] outline-none transition placeholder:text-[#94a3b8] resize-none rounded-xl" /></div>
-            <button type="submit" className="w-full h-14 bg-gradient-to-b from-[#fbbf24] to-[#c9a227] hover:from-[#f0d87a] hover:to-[#fbbf24] text-[#0a1f3d] font-black text-[16px] rounded-full shadow-[0_6px_0_#92760e,0_8px_24px_rgba(201,162,39,0.4)] hover:shadow-[0_3px_0_#92760e] hover:translate-y-[3px] transition-all flex items-center justify-center gap-3 mt-2">無料相談を申し込む<Ico d={I.arrow} size={18} /></button>
+            <button type="submit" disabled={submitting} className="w-full h-14 bg-gradient-to-b from-[#fbbf24] to-[#c9a227] hover:from-[#f0d87a] hover:to-[#fbbf24] text-[#0a1f3d] font-black text-[16px] rounded-full shadow-[0_6px_0_#92760e,0_8px_24px_rgba(201,162,39,0.4)] hover:shadow-[0_3px_0_#92760e] hover:translate-y-[3px] transition-all flex items-center justify-center gap-3 mt-2 disabled:opacity-60 disabled:cursor-not-allowed">{submitting ? "送信中…" : <>無料相談を申し込む<Ico d={I.arrow} size={18} /></>}</button>
             <p className="text-[11px] text-[#94a3b8] text-center">送信後、2営業日以内にご連絡します</p>
           </form>
         </div>
