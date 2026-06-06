@@ -97,7 +97,7 @@ function FV() {
               <span className="text-[13px] text-[#64748b] mb-1">（税別）</span>
             </div>
             <ul className="space-y-2.5">
-              {["ブランドステートメント策定（必須）", "MVV（ミッション・ビジョン・バリュー）", "ロゴデザイン（3案）", "名刺デザイン（3案）", "HP制作（4-5P・撮影込み）", "営業用会社紹介資料（A4換算6-8P）"].map((f) => (
+              {["ブランドステートメント策定（市場分析・ポジショニング／必須）", "MVV策定（ミッション・ビジョン・バリュー）", "ロゴデザイン（3案）", "名刺デザイン（3案）", "HP制作（4-5P・撮影込み）", "営業用会社紹介資料（A4換算6-8P）"].map((f) => (
                 <li key={f} className="flex items-center gap-2.5 text-[13px] text-[#0a1f3d]">
                   <span className="shrink-0 w-5 h-5 bg-[#22c55e] rounded-full flex items-center justify-center"><Ico d={I.check} size={11} className="text-white" /></span>{f}
                 </li>
@@ -284,7 +284,7 @@ function Plans() {
               </div>
               <div>
                 <ul className="space-y-2.5 mb-7">
-                  {["ブランドステートメント策定", "MVV（ミッション・ビジョン・バリュー）策定", "ロゴデザイン（3案・バリエーション含む）", "名刺デザイン（3案・表面/裏面）", "HP制作（4-5P・撮影込み）", "会社紹介資料（A4換算6-8P）"].map((f) => (
+                  {["ブランドステートメント策定（市場分析・ポジショニング）", "MVV（ミッション・ビジョン・バリュー）策定", "ロゴデザイン（3案・バリエーション含む）", "名刺デザイン（3案・表面/裏面）", "HP制作（4-5P・撮影込み）", "会社紹介資料（A4換算6-8P）"].map((f) => (
                     <li key={f} className="flex items-center gap-2.5 text-[13px] text-[#0a1f3d]">
                       <span className="shrink-0 w-5 h-5 bg-[#22c55e] rounded-full flex items-center justify-center"><Ico d={I.check} size={11} className="text-white" /></span>{f}
                     </li>
