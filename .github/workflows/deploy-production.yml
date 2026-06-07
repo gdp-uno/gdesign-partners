@@ -29,11 +29,15 @@ jobs:
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
+            set -e
             cd /var/www/company-lp/production
-            git pull origin main || (git clone https://github.com/gdp-uno/company-lp.git . && git checkout main)
+            git fetch origin main
+            git reset --hard origin/main
             npm ci --production=false
             npm run build
             pm2 describe company-lp-production > /dev/null 2>&1 \
-              && pm2 restart company-lp-production \
+              && pm2 restart company-lp-production --update-env \
               || pm2 start npm --name "company-lp-production" -- start -- -p 3000
             pm2 save
+            sleep 5
+            curl -fsS http://localhost:3000/lp/dx > /dev/null

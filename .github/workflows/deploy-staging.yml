@@ -29,12 +29,16 @@ jobs:
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
+            set -e
             cd /var/www/company-lp/staging
-            git pull origin develop || (git clone https://github.com/gdp-uno/company-lp.git . && git checkout develop)
+            git fetch origin develop
+            git reset --hard origin/develop
             printf 'BASIC_AUTH_ENABLED=true\nSTAGING_MODE=true\n' > .env.local
             npm ci --production=false
             npm run build
             pm2 describe company-lp-staging > /dev/null 2>&1 \
-              && pm2 restart company-lp-staging \
+              && pm2 restart company-lp-staging --update-env \
               || pm2 start npm --name "company-lp-staging" -- start -- -p 3001
             pm2 save
+            sleep 5
+            curl -fsS -u gdp2026:gdp2026 http://localhost:3001/lp/dx > /dev/null
