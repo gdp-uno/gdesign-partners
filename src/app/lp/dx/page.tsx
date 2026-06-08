@@ -564,9 +564,6 @@ function Plans() {
                     </li>
                   ))}
                 </ul>
-                <div className="mb-5 py-2 px-3 bg-[#f0f6fc] border border-[#15447b]/20 rounded-lg text-[11px] text-[#475569] text-center">
-                  支払条件：着手時<strong className="text-[#0a1f3d]">50%前払い</strong>・残金は納品後
-                </div>
                 <a
                   href="#cta"
                   onClick={() => trackEvent("click_plan", { plan: s.name })}
