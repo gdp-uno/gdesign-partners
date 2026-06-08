@@ -105,6 +105,17 @@ function FV() {
                 </li>
               ))}
             </ul>
+            <div className="mt-4 pt-3 border-t border-[#e2e8f0]">
+              <div className="flex items-center gap-2.5 bg-gradient-to-r from-[#fef9c3] to-[#fff7e6] border border-[#fbbf24] rounded-xl px-4 py-2.5">
+                <div className="w-6 h-6 bg-[#fbbf24] rounded-full flex items-center justify-center shrink-0">
+                  <Ico d={I.bolt} size={13} className="text-[#0a1f3d]" />
+                </div>
+                <div className="leading-snug">
+                  <div className="text-[11.5px] text-[#0a1f3d]"><span className="font-black">特典：</span>生成AI活用カリキュラム</div>
+                  <div className="mt-0.5"><span className="font-black text-[#15447b] text-[14px]">無料視聴</span><span className="text-[11px] text-[#475569]"> つき（月額伴走プラン対象・※一部条件有）</span></div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -443,6 +454,7 @@ function CTA() {
               <div><label className="flex items-center gap-1.5 mb-1.5"><span className="font-bold text-[12px] text-[#0a1f3d]">会社名 / 屋号</span><span className="text-[10px] text-white bg-[#dc2626] px-1.5 py-0.5 rounded font-bold">必須</span></label><input name="company" type="text" required placeholder="〇〇サロン / フリーランス" className="w-full bg-white border-2 border-[#e2e8f0] focus:border-[#15447b] text-[#0a1f3d] px-4 h-12 text-[14px] outline-none transition placeholder:text-[#94a3b8] rounded-xl" /></div>
             </div>
             <div><label className="flex items-center gap-1.5 mb-1.5"><span className="font-bold text-[12px] text-[#0a1f3d]">メールアドレス</span><span className="text-[10px] text-white bg-[#dc2626] px-1.5 py-0.5 rounded font-bold">必須</span></label><input name="email" type="email" required placeholder="name@company.co.jp" className="w-full bg-white border-2 border-[#e2e8f0] focus:border-[#15447b] text-[#0a1f3d] px-4 h-12 text-[14px] outline-none transition placeholder:text-[#94a3b8] rounded-xl" /></div>
+            <div><label className="flex items-center gap-1.5 mb-1.5"><span className="font-bold text-[12px] text-[#0a1f3d]">電話番号</span><span className="text-[10px] text-white bg-[#dc2626] px-1.5 py-0.5 rounded font-bold">必須</span></label><input name="phone" type="tel" required placeholder="090-1234-5678" className="w-full bg-white border-2 border-[#e2e8f0] focus:border-[#15447b] text-[#0a1f3d] px-4 h-12 text-[14px] outline-none transition placeholder:text-[#94a3b8] rounded-xl" /></div>
             <div><label className="block font-bold text-[12px] text-[#0a1f3d] mb-1.5">現在の最大の課題（近いものを選択）</label><select name="main_issue" className="w-full bg-white border-2 border-[#e2e8f0] focus:border-[#15447b] text-[#0a1f3d] px-4 h-12 text-[14px] outline-none transition rounded-xl"><option value="">選択してください</option><option value="想いや理念を言葉にできない">想いや理念をうまく言葉にできない</option><option value="MVVを作りたいが空虚な言葉になってしまう">MVVを作りたいが空虚な言葉になってしまう</option><option value="ブランドの独自性を表現できていない">ブランドの独自性・世界観をうまく表現できていない</option><option value="ターゲットに想いが届いていない感覚がある">ターゲットに想いが届いていない感覚がある</option></select></div>
             <div><label className="block font-bold text-[12px] text-[#0a1f3d] mb-1.5">伝えたい想い・ご相談内容</label><textarea name="challenge" rows={4} placeholder="例：「なぜこの事業をやっているのか」という想いはあるが、いざ言葉にしようとすると漠然としてしまい、HPやSNSで何を発信すればいいか分からなくなっている..." className="w-full bg-white border-2 border-[#e2e8f0] focus:border-[#15447b] text-[#0a1f3d] px-4 py-3 text-[14px] outline-none transition placeholder:text-[#94a3b8] resize-none rounded-xl" /></div>
             <button type="submit" disabled={submitting} className="w-full h-14 bg-gradient-to-b from-[#fbbf24] to-[#c9a227] hover:from-[#f0d87a] hover:to-[#fbbf24] text-[#0a1f3d] font-black text-[16px] rounded-full shadow-[0_6px_0_#92760e,0_8px_24px_rgba(201,162,39,0.4)] hover:shadow-[0_3px_0_#92760e] hover:translate-y-[3px] transition-all flex items-center justify-center gap-3 mt-2 disabled:opacity-60 disabled:cursor-not-allowed">{submitting ? "送信中…" : <>無料相談を申し込む<Ico d={I.arrow} size={18} /></>}</button>
