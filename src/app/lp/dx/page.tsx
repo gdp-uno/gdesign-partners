@@ -504,10 +504,10 @@ function Plans() {
     },
   ];
   const subs = [
-    { code: "LIGHT", name: "ライト伴走", price: "50,000", hours: "5h", items: ["月次動作確認MTG（月1回）", "問い合わせ対応（メール/電話/Web・翌営業日回答）"] },
-    { code: "STANDARD", name: "スタンダード伴走", price: "120,000", hours: "10h", items: ["ライトの内容すべて", "既存システムの軽微なバグ修正・改修・拡張", "既存システムの監視"], featured: true },
-    { code: "PRO", name: "プロ伴走", price: "300,000", hours: "30h", items: ["スタンダードの内容すべて", "月1回の改善提案・棚卸し", "新規効率化提案（業務診断レベル）"] },
-    { code: "ENTERPRISE", name: "経営パートナー", price: "500,000", hours: "50h", items: ["スタンダードの内容すべて", "月1回の改善提案・棚卸し", "新規効率化提案（仕組み構築レベル）"] },
+    { code: "LIGHT", name: "ライト伴走", price: "50,000", hours: "5h", items: ["月1回 戦略MTG", "ツール質問対応", "月次レポート"] },
+    { code: "STANDARD", name: "スタンダード伴走", price: "120,000", hours: "10h", items: ["月2回 戦略MTG", "1業務領域の改善", "ドキュメント更新"], featured: true },
+    { code: "PRO", name: "プロ伴走", price: "300,000", hours: "30h", items: ["月次MTG＋改善提案・棚卸し（月1回）", "複数業務の並行改善", "優先サポート"] },
+    { code: "ENTERPRISE", name: "経営パートナー", price: "500,000", hours: "50h", items: ["月次MTG＋新規効率化提案（月1回）", "全社DX伴走", "専任チーム配置"] },
   ];
 
   return (
@@ -565,9 +565,6 @@ function Plans() {
                     </li>
                   ))}
                 </ul>
-                <div className="mb-5 py-2 px-3 bg-[#f0f6fc] border border-[#15447b]/20 rounded-lg text-[11px] text-[#475569] text-center">
-                  支払条件：着手時<strong className="text-[#0a1f3d]">50%前払い</strong>・残金は納品後
-                </div>
                 <a
                   href="#cta"
                   onClick={() => trackEvent("click_plan", { plan: s.name })}
@@ -645,53 +642,34 @@ function Plans() {
             ))}
           </div>
         </div>
-        {/* 月額伴走プラン特典（2択） */}
-        <div className="mt-10 bg-gradient-to-br from-[#fef9c3] to-[#fff7e6] border-2 border-[#fbbf24] rounded-2xl p-6 sm:p-8 max-w-2xl mx-auto">
+        {/* 同時申込割引 */}
+        <div className="mt-10 bg-white border-2 border-[#dc2626]/30 rounded-2xl p-5 sm:p-6 max-w-2xl mx-auto text-center">
+          <div className="font-display font-bold text-[#dc2626] text-[13px] mb-1">スポット＋サブスク 同時申込割引</div>
+          <p className="text-[13px] text-[#475569] leading-[1.85]">
+            スポットプランとサブスクプランを同時にお申込みいただくと、<strong className="text-[#0a1f3d]">¥5,000〜¥80,000割引</strong>（プランの組み合わせによる）
+          </p>
+        </div>
+
+        {/* 全プラン共通特典 */}
+        <div className="mt-6 bg-gradient-to-br from-[#fef9c3] to-[#fff7e6] border-2 border-[#fbbf24] rounded-2xl p-6 sm:p-8 max-w-2xl mx-auto">
           <div className="flex items-center justify-center gap-3 mb-4">
             <div className="w-10 h-10 bg-[#fbbf24] rounded-full flex items-center justify-center shrink-0">
               <Ico d={I.bolt} size={18} className="text-[#0a1f3d]" />
             </div>
-            <div className="font-display font-black text-[#0a1f3d] text-[18px] sm:text-[20px]">月額伴走プラン特典</div>
+            <div className="font-display font-black text-[#0a1f3d] text-[18px] sm:text-[20px]">月額伴走プラン共通特典</div>
           </div>
-          <p className="text-center text-[12px] text-[#475569] mb-4">以下のいずれかをお選びいただけます</p>
-          <div className="grid sm:grid-cols-2 gap-3">
-            <div className="bg-white rounded-xl border-2 border-[#dc2626]/30 px-5 py-4">
-              <div className="font-display font-black text-[#dc2626] text-[13px] mb-1.5">① 値引き特典</div>
-              <p className="text-[12px] text-[#475569] leading-[1.8]">スポット＋サブスクの<strong className="text-[#0a1f3d]">同時申込</strong>で<br /><strong className="text-[#0a1f3d]">¥5,000〜¥80,000</strong>割引</p>
+          <div className="bg-white rounded-xl border border-[#fbbf24]/50 px-6 py-5 text-center">
+            <div className="font-display font-black text-[#15447b] text-[16px] sm:text-[18px] mb-2">
+              生成AI活用カリキュラムを<span className="text-[#dc2626]">無料視聴</span>
             </div>
-            <div className="bg-white rounded-xl border-2 border-[#fbbf24]/50 px-5 py-4">
-              <div className="font-display font-black text-[#15447b] text-[13px] mb-1.5">② 生成AI講座 無料視聴</div>
-              <p className="text-[12px] text-[#475569] leading-[1.8]">ChatGPT・Claude 業務活用カリキュラムをご契約者様限定で<strong className="text-[#0a1f3d]">無料</strong>ご視聴</p>
-            </div>
+            <p className="text-[13px] text-[#475569] leading-[1.85]">
+              ChatGPT・Claude などの業務活用ノウハウを体系的に学べるオンライン講座を<br className="hidden sm:block" />
+              ご契約者様限定で無料でご覧いただけます。
+            </p>
           </div>
         </div>
 
-        <div className="mt-6 max-w-2xl mx-auto text-[11px] text-[#64748b] space-y-2">
-          <p className="text-center">※ 表示価格はすべて税抜</p>
-          <div className="overflow-x-auto">
-            <table className="w-full text-left border-collapse text-[11px]">
-              <thead>
-                <tr className="border-b border-[#e2e8f0]">
-                  <th className="py-1.5 pr-4 font-bold text-[#475569] whitespace-nowrap">プラン</th>
-                  <th className="py-1.5 pr-4 font-bold text-[#475569] whitespace-nowrap">契約期間</th>
-                  <th className="py-1.5 font-bold text-[#475569]">解約申出</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr className="border-b border-[#e2e8f0]/50">
-                  <td className="py-1.5 pr-4 whitespace-nowrap">ライト伴走</td>
-                  <td className="py-1.5 pr-4 whitespace-nowrap">3ヶ月</td>
-                  <td className="py-1.5">初月10営業日以内は無条件解約可 / 以降は当月末申請→翌月末解約</td>
-                </tr>
-                <tr>
-                  <td className="py-1.5 pr-4 whitespace-nowrap">スタンダード以上</td>
-                  <td className="py-1.5 pr-4 whitespace-nowrap">3ヶ月</td>
-                  <td className="py-1.5">最終月の前月末申請で解約 / 以降1ヶ月単位で更新</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
+        <p className="mt-6 text-center text-[11px] text-[#64748b]">※ 表示価格はすべて税抜。最低契約期間：スタンダード伴走以上は3ヶ月（ライト伴走は契約期間なし）／以降1ヶ月単位で更新</p>
       </div>
     </section>
   );
@@ -857,15 +835,6 @@ function CTA() {
                 <span className="text-[10px] text-white bg-[#dc2626] px-1.5 py-0.5 rounded font-bold">必須</span>
               </label>
               <input name="email" type="email" required placeholder="name@company.co.jp"
-                className="w-full bg-white border-2 border-[#e2e8f0] focus:border-[#15447b] text-[#0a1f3d] px-4 h-12 text-[14px] outline-none transition placeholder:text-[#94a3b8] rounded-xl" />
-            </div>
-
-            <div>
-              <label className="flex items-center gap-1.5 mb-1.5">
-                <span className="font-display font-bold text-[12px] text-[#0a1f3d]">電話番号</span>
-                <span className="text-[10px] text-white bg-[#dc2626] px-1.5 py-0.5 rounded font-bold">必須</span>
-              </label>
-              <input name="phone" type="tel" required placeholder="090-1234-5678"
                 className="w-full bg-white border-2 border-[#e2e8f0] focus:border-[#15447b] text-[#0a1f3d] px-4 h-12 text-[14px] outline-none transition placeholder:text-[#94a3b8] rounded-xl" />
             </div>
 
