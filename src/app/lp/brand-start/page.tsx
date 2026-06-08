@@ -155,6 +155,17 @@ function FV() {
             <div className="mt-5 pt-4 border-t border-[#e2e8f0] text-[12px] text-[#64748b]">
               不要なコンテンツは値引き、追加は単品売値で対応可能。柔軟にカスタマイズできます。
             </div>
+            <div className="mt-4">
+              <div className="flex items-center gap-2.5 bg-gradient-to-r from-[#fef9c3] to-[#fff7e6] border border-[#fbbf24] rounded-xl px-4 py-2.5">
+                <div className="w-6 h-6 bg-[#fbbf24] rounded-full flex items-center justify-center shrink-0">
+                  <Ico d={I.bolt} size={13} className="text-[#0a1f3d]" />
+                </div>
+                <div className="leading-snug">
+                  <div className="text-[11.5px] text-[#0a1f3d]"><span className="font-black">特典：</span>生成AI活用カリキュラム</div>
+                  <div className="mt-0.5"><span className="font-black text-[#15447b] text-[14px]">無料視聴</span><span className="text-[11px] text-[#475569]"> つき（月額伴走プラン対象・※一部条件有）</span></div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -604,6 +615,14 @@ function CTA() {
                 <span className="text-[10px] text-white bg-[#dc2626] px-1.5 py-0.5 rounded font-bold">必須</span>
               </label>
               <input name="email" type="email" required placeholder="name@company.co.jp"
+                className="w-full bg-white border-2 border-[#e2e8f0] focus:border-[#15447b] text-[#0a1f3d] px-4 h-12 text-[14px] outline-none transition placeholder:text-[#94a3b8] rounded-xl" />
+            </div>
+            <div>
+              <label className="flex items-center gap-1.5 mb-1.5">
+                <span className="font-bold text-[12px] text-[#0a1f3d]">電話番号</span>
+                <span className="text-[10px] text-white bg-[#dc2626] px-1.5 py-0.5 rounded font-bold">必須</span>
+              </label>
+              <input name="phone" type="tel" required placeholder="090-1234-5678"
                 className="w-full bg-white border-2 border-[#e2e8f0] focus:border-[#15447b] text-[#0a1f3d] px-4 h-12 text-[14px] outline-none transition placeholder:text-[#94a3b8] rounded-xl" />
             </div>
             <div>
