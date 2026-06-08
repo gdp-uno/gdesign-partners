@@ -175,12 +175,11 @@ function FV() {
               <div className="leading-snug">
                 <div className="text-[11.5px] text-[#0a1f3d]">
                   <span className="font-black">特典：</span>
-                  <span>生成AI活用カリキュラム</span>
+                  <span className="font-black text-[#dc2626]">値引き</span>
+                  <span> or </span>
+                  <span className="font-black text-[#15447b]">生成AI視聴</span>
                 </div>
-                <div className="mt-0.5">
-                  <span className="font-black text-[#dc2626] text-[14px]">無料視聴</span>
-                  <span className="text-[11px] text-[#475569]"> つき（月額伴走プラン対象）</span>
-                </div>
+                <div className="mt-0.5 text-[11px] text-[#475569]">月額プラン対象・どちらか選択</div>
               </div>
             </div>
           </div>
