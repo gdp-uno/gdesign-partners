@@ -676,8 +676,8 @@ function Plans() {
               <tbody>
                 <tr className="border-b border-[#e2e8f0]/50">
                   <td className="py-1.5 pr-4 whitespace-nowrap">ライト伴走</td>
-                  <td className="py-1.5 pr-4 whitespace-nowrap">3ヶ月</td>
-                  <td className="py-1.5">初月10営業日以内は無条件解約可 / 以降は当月末申請→翌月末解約</td>
+                  <td className="py-1.5 pr-4 whitespace-nowrap">なし</td>
+                  <td className="py-1.5">当月末申請→翌月末解約</td>
                 </tr>
                 <tr>
                   <td className="py-1.5 pr-4 whitespace-nowrap">スタンダード以上</td>
