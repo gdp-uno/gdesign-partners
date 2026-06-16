@@ -53,7 +53,7 @@ function Kicker({ jp, en, color = "#15447b" }: { jp: string; en: string; color?:
 }
 function SectionTitle({ children }: { children: React.ReactNode }) {
   return (
-    <h2 className="font-display font-black text-[#0a1f3d] text-[28px] sm:text-[36px] lg:text-[44px] leading-[1.35] tracking-[-0.01em] text-center max-w-4xl mx-auto">
+    <h2 className="font-display font-black text-[#0a1f3d] text-[28px] sm:text-[36px] lg:text-[44px] leading-[1.35] tracking-[-0.01em] text-center max-w-4xl mx-auto [text-wrap:balance]">
       {children}
     </h2>
   );

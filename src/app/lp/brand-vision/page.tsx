@@ -39,7 +39,7 @@ function Kicker({ jp, en, color = "#15447b" }: { jp: string; en: string; color?:
   );
 }
 function SectionTitle({ children }: { children: React.ReactNode }) {
-  return <h2 className="font-black text-[#0a1f3d] text-[28px] sm:text-[36px] lg:text-[44px] leading-[1.35] tracking-[-0.01em] text-center max-w-4xl mx-auto">{children}</h2>;
+  return <h2 className="font-black text-[#0a1f3d] text-[28px] sm:text-[36px] lg:text-[44px] leading-[1.35] tracking-[-0.01em] text-center max-w-4xl mx-auto [text-wrap:balance]">{children}</h2>;
 }
 function Highlight({ children, color = "#fbbf24" }: { children: React.ReactNode; color?: string }) {
   return <span className="[box-decoration-break:clone] [-webkit-box-decoration-break:clone]" style={{ backgroundImage: `linear-gradient(${color}99, ${color}99)`, backgroundRepeat: "no-repeat", backgroundPosition: "0 100%", backgroundSize: "100% 0.625rem" }}>{children}</span>;
@@ -111,8 +111,8 @@ function FV() {
                   <Ico d={I.bolt} size={13} className="text-[#0a1f3d]" />
                 </div>
                 <div className="leading-snug">
-                  <div className="text-[11.5px] text-[#0a1f3d]"><span className="font-black">特典：</span>生成AI活用カリキュラム</div>
-                  <div className="mt-0.5"><span className="font-black text-[#15447b] text-[14px]">無料視聴</span><span className="text-[11px] text-[#475569]"> つき（月額伴走プラン対象・※一部条件有）</span></div>
+                  <div className="text-[11.5px] text-[#0a1f3d]"><span className="font-black">特典：</span><span className="font-black text-[#dc2626]">値引き</span> or <span className="font-black text-[#15447b]">e-ラーニングコンテンツ</span></div>
+                  <div className="mt-0.5 text-[11px] text-[#475569]">※一部条件有・どちらか選択</div>
                 </div>
               </div>
             </div>
@@ -313,7 +313,7 @@ function Plans() {
           <div className="mt-8 bg-gradient-to-br from-[#fef9c3] to-[#fff7e6] border-2 border-[#fbbf24] rounded-2xl p-6 sm:p-8 max-w-3xl mx-auto text-center">
             <div className="font-black text-[#0a1f3d] text-[18px] mb-2">ご契約特典</div>
             <p className="text-[13px] text-[#475569] leading-[1.85]">
-              生成AI（ChatGPT・Claude）業務活用カリキュラムを<span className="font-bold text-[#dc2626]">無料視聴</span>。<br />ご契約者様限定のオンライン講座で、AI活用ノウハウを体系的に学べます。
+              生成AI（ChatGPT・Claude）業務活用の<span className="font-bold text-[#dc2626]">e-ラーニングコンテンツ</span>をご利用いただけます。<br />オンライン講座で、AI活用ノウハウを体系的に学べます。（※一部条件有）
             </p>
           </div>
         </div>

@@ -56,7 +56,7 @@ function Kicker({ jp, en, color = "#15447b" }: { jp: string; en: string; color?:
 }
 function SectionTitle({ children }: { children: React.ReactNode }) {
   return (
-    <h2 className="font-display font-black text-[#0a1f3d] text-[28px] sm:text-[36px] lg:text-[44px] leading-[1.35] tracking-[-0.01em] text-center max-w-4xl mx-auto">
+    <h2 className="font-display font-black text-[#0a1f3d] text-[28px] sm:text-[36px] lg:text-[44px] leading-[1.35] tracking-[-0.01em] text-center max-w-4xl mx-auto [text-wrap:balance]">
       {children}
     </h2>
   );
@@ -122,10 +122,8 @@ function PackageCard() {
             <Ico d={I.bolt} size={13} className="text-[#0a1f3d]" />
           </div>
           <div className="text-[13px] text-[#0a1f3d] leading-snug">
-            <span className="font-black">特典：</span>
-            <span>生成AI活用カリキュラム</span>
-            <span className="font-black text-[#dc2626] text-[15px]">　無料視聴</span>
-            <span className="text-[#475569]"> つき</span>
+            <div><span className="font-black">特典：</span><span className="font-black text-[#dc2626]">値引き</span> or <span className="font-black text-[#15447b]">e-ラーニングコンテンツ</span></div>
+            <div className="mt-0.5 text-[11px] text-[#475569]">※一部条件有・どちらか選択</div>
           </div>
         </div>
       </div>
@@ -689,11 +687,11 @@ function Plans() {
             </div>
             <div className="bg-white rounded-xl border border-[#fbbf24]/50 px-6 py-5 text-center">
               <div className="font-display font-black text-[#15447b] text-[16px] sm:text-[18px] mb-2">
-                生成AI活用カリキュラムを<span className="text-[#dc2626]">無料視聴</span>
+                生成AI活用の<span className="text-[#dc2626]">e-ラーニングコンテンツ</span>
               </div>
               <p className="text-[13px] text-[#475569] leading-[1.85]">
                 ChatGPT・Claude などの業務活用ノウハウを体系的に学べるオンライン講座を<br className="hidden sm:block" />
-                ご契約者様限定で無料でご覧いただけます。
+                ご利用いただけます。（※一部条件有）
               </p>
             </div>
           </div>
