@@ -40,7 +40,7 @@ function Kicker({ jp, en, color = "#15447b" }: { jp: string; en: string; color?:
   );
 }
 function SectionTitle({ children }: { children: React.ReactNode }) {
-  return <h2 className="font-black text-[#0a1f3d] text-[28px] sm:text-[36px] lg:text-[44px] leading-[1.35] tracking-[-0.01em] text-center max-w-4xl mx-auto">{children}</h2>;
+  return <h2 className="font-black text-[#0a1f3d] text-[28px] sm:text-[36px] lg:text-[44px] leading-[1.35] tracking-[-0.01em] text-center max-w-4xl mx-auto [text-wrap:balance]">{children}</h2>;
 }
 function Highlight({ children, color = "#fbbf24" }: { children: React.ReactNode; color?: string }) {
   return <span className="[box-decoration-break:clone] [-webkit-box-decoration-break:clone]" style={{ backgroundImage: `linear-gradient(${color}99, ${color}99)`, backgroundRepeat: "no-repeat", backgroundPosition: "0 100%", backgroundSize: "100% 0.625rem" }}>{children}</span>;
@@ -337,8 +337,8 @@ function Plans() {
               <p className="text-[12px] text-[#475569] leading-[1.8]">スポット＋サブスクの<strong className="text-[#0a1f3d]">同時申込</strong>で<br /><strong className="text-[#0a1f3d]">¥5,000〜¥80,000</strong>割引</p>
             </div>
             <div className="bg-white rounded-xl border-2 border-[#fbbf24]/50 px-5 py-4">
-              <div className="font-black text-[#15447b] text-[13px] mb-1.5">② 生成AI講座 無料視聴</div>
-              <p className="text-[12px] text-[#475569] leading-[1.8]">ChatGPT・Claude 業務活用カリキュラムをご契約者様限定で<strong className="text-[#0a1f3d]">無料</strong>ご視聴</p>
+              <div className="font-black text-[#15447b] text-[13px] mb-1.5">② e-ラーニングコンテンツ</div>
+              <p className="text-[12px] text-[#475569] leading-[1.8]">ChatGPT・Claude 業務活用カリキュラムを<strong className="text-[#0a1f3d]">無料</strong>ご視聴（※一部条件有）</p>
             </div>
           </div>
         </div>
