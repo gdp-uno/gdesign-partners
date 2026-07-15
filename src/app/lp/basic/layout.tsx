@@ -7,6 +7,9 @@ export const metadata: Metadata = {
   title: "基本パッケージ | ブランドの土台を4週間でつくる",
   description:
     "創業・リブランディング向けのブランド一括制作パッケージ。ブランドステートメント・MVV・ロゴ・名刺・HP・営業資料を¥298,000でワンストップ納品。初回相談30分無料。",
+  alternates: {
+    canonical: "https://gdesign-partners.co.jp/lp/basic/",
+  },
 };
 
 export default function BasicLpLayout({ children }: { children: React.ReactNode }) {

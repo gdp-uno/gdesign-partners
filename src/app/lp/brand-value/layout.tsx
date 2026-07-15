@@ -5,10 +5,13 @@ import BasicHeader from "@/components/lp/basic/BasicHeader";
 import { getAvailableSeats } from "@/lib/seats";
 
 export const metadata: Metadata = {
-  title: "価格競争から脱却したい経営者へ｜戦略ブランディング支援 | Growth Design Partners",
+  title: "価格競争から脱却したい経営者へ｜戦略ブランディング支援",
   description:
     "相見積もりで疲弊する前に。市場分析・ポジショニングから始まる戦略的ブランディングで、技術力を「選ばれる真価」に変えます。¥298,000の一括パッケージ。中小企業・BtoB向け。初回相談30分無料。",
   keywords: "価格競争 脱却 ブランディング, 中小企業 差別化, ブランドステートメント 策定, 技術力 価値 言語化, BtoB ブランディング",
+  alternates: {
+    canonical: "https://gdesign-partners.co.jp/lp/brand-value/",
+  },
   openGraph: {
     title: "価格競争から脱却したい経営者へ｜戦略ブランディング支援",
     description: "市場分析から始まる戦略的ブランディング。「選ばれる理由」を構築し、価格競争から脱却します。",

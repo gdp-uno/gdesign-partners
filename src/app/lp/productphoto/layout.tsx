@@ -7,6 +7,9 @@ export const metadata: Metadata = {
   title: "商品撮影代行 | 月額定額・EC特化フォトサービス",
   description:
     "月額定額で商品撮影を継続的に。アパレルから雑貨まで、EC特化の撮影代行サービス。フルカスタム対応・レタッチ込み。先着3社限定特典あり。まずは無料相談から。",
+  alternates: {
+    canonical: "https://gdesign-partners.co.jp/lp/productphoto/",
+  },
 };
 
 export default function ProductphotoLayout({ children }: { children: React.ReactNode }) {

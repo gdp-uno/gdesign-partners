@@ -7,6 +7,9 @@ export const metadata: Metadata = {
   title: "生成AI eラーニング | チーム全員がAIを使いこなせる会社へ",
   description:
     "月額5,000円/人から。600社・4,000名が選んだ実務直結型・生成AI eラーニング。400コンテンツ以上、業務別カリキュラム、AI倫理・セキュリティ対応。法人向けライセンス販売。",
+  alternates: {
+    canonical: "https://gdesign-partners.co.jp/lp/elearning/",
+  },
 };
 
 export default function ElearningLpLayout({ children }: { children: React.ReactNode }) {

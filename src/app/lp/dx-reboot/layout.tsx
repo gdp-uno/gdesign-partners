@@ -4,10 +4,13 @@ import Link from "next/link";
 import DxHeader from "@/components/lp/dx/DxHeader";
 
 export const metadata: Metadata = {
-  title: "DX導入が定着しなかった企業へ｜業務フロー設計から始めるDX再挑戦 | Growth Design Partners",
+  title: "DX導入が定着しなかった企業へ｜業務フロー設計から始めるDX再挑戦",
   description:
     "kintone・RPAが「高い名刺管理ツール」になっていませんか？業務フローから逆算した設計で、今度こそ現場に定着させます。人材業界・サービス業で豊富な支援実績。AsIs/ToBe分析から丁寧に伴走。",
   keywords: "DX 失敗 定着しない, kintone 使われない, 業務フロー 設計 DX, DX 再挑戦 支援, RPA 定着 コンサル",
+  alternates: {
+    canonical: "https://gdesign-partners.co.jp/lp/dx-reboot/",
+  },
   openGraph: {
     title: "DX導入が定着しなかった企業へ｜業務フロー設計から始めるDX再挑戦",
     description: "業務フローから逆算した設計で、今度こそ現場が使える仕組みを作ります。",

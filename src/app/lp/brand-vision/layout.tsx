@@ -5,10 +5,13 @@ import BasicHeader from "@/components/lp/basic/BasicHeader";
 import { getAvailableSeats } from "@/lib/seats";
 
 export const metadata: Metadata = {
-  title: "理念・想いをブランドに変えたい起業家へ｜MVV策定から始まるブランディング | Growth Design Partners",
+  title: "理念・想いをブランドに変えたい起業家へ｜MVV策定から始まるブランディング",
   description:
     "想いはあるのに言語化できない方へ。ミッション・ビジョン・バリュー（MVV）の策定から、ターゲットに届くブランドストーリーを構築します。女性起業家・スタートアップ向け。¥298,000の一括パッケージ。",
   keywords: "ブランディング 理念 言語化, MVV 策定 起業家, 女性起業家 ブランディング, ブランドストーリー, ミッション ビジョン バリュー 策定",
+  alternates: {
+    canonical: "https://gdesign-partners.co.jp/lp/brand-vision/",
+  },
   openGraph: {
     title: "理念・想いをブランドに変えたい起業家へ｜MVV策定から始まるブランディング",
     description: "頭の中の想いを、ターゲットに届くブランドストーリーに翻訳します。理念起点の戦略設計。",

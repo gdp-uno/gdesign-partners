@@ -4,10 +4,13 @@ import Link from "next/link";
 import DxHeader from "@/components/lp/dx/DxHeader";
 
 export const metadata: Metadata = {
-  title: "急成長スタートアップのバックオフィス自動化｜Claude Code活用 DX支援 | Growth Design Partners",
+  title: "急成長スタートアップのバックオフィス自動化｜Claude Code活用 DX支援",
   description:
     "エンジニアリソースをプロダクト開発に集中させてください。Claude Code活用でバックオフィス自動化を従来の1/3の工数・期間で実現。SaaS・急成長スタートアップの成長フェーズを理解した支援。",
   keywords: "スタートアップ バックオフィス 自動化, Claude Code 業務効率化, SaaS オペレーション 改善, エンジニア 業務自動化, スタートアップ DX",
+  alternates: {
+    canonical: "https://gdesign-partners.co.jp/lp/dx-ops/",
+  },
   openGraph: {
     title: "急成長スタートアップのバックオフィス自動化｜Claude Code活用 DX支援",
     description: "エンジニアをプロダクトに集中させる。Claude Code活用で1/3の工数・期間でバックオフィス自動化。",

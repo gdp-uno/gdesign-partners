@@ -5,10 +5,13 @@ import BasicHeader from "@/components/lp/basic/BasicHeader";
 import { getAvailableSeats } from "@/lib/seats";
 
 export const metadata: Metadata = {
-  title: "起業前の業者選びで迷っている方へ｜ブランド一括パッケージ4週間 | Growth Design Partners",
+  title: "起業前の業者選びで迷っている方へ｜ブランド一括パッケージ4週間",
   description:
     "起業準備中・創業直後の方へ。ロゴ・名刺・HP・営業資料を1社・4週間でまとめて制作。複数業者への問い合わせ疲れを解消し、¥298,000で事業開始に必要なブランドツール一式を揃えます。初回相談30分無料。",
   keywords: "起業 ブランディング, 起業前 ロゴ 制作, 一括 ブランドパッケージ, 起業準備 HP 名刺, 創業 ブランド 4週間",
+  alternates: {
+    canonical: "https://gdesign-partners.co.jp/lp/brand-start/",
+  },
   openGraph: {
     title: "起業前の業者選びで迷っている方へ｜ブランド一括パッケージ4週間",
     description: "1社・4週間で、起業に必要なブランドツール一式が揃います。複数業者への問い合わせ疲れを今すぐ解消。",

@@ -7,6 +7,9 @@ export const metadata: Metadata = {
   title: "DX・業務効率化支援 | 定型業務を仕組みに任せて、経営戦略に集中する",
   description:
     "スタートアップ・少人数組織の社長・責任者へ。定型業務をAI×ノーコードで自動化し、月72時間を取り戻します。初回相談30分無料。先着10社限定。",
+  alternates: {
+    canonical: "https://gdesign-partners.co.jp/lp/dx/",
+  },
 };
 
 export default function DxLpLayout({ children }: { children: React.ReactNode }) {

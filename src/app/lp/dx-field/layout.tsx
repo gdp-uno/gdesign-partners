@@ -4,10 +4,13 @@ import Link from "next/link";
 import DxHeader from "@/components/lp/dx/DxHeader";
 
 export const metadata: Metadata = {
-  title: "製造業・アナログ業務の効率化｜AI活用DX支援 現場伴走型 | Growth Design Partners",
+  title: "製造業・アナログ業務の効率化｜AI活用DX支援 現場伴走型",
   description:
     "紙・Excel・FAX中心の現場業務をAIで効率化。500万円以上の見積もりに驚いた方へ、従来の1/3以下のコストで実現。IT人材ゼロでも現場が使えるまで丁寧に伴走します。製造業実績多数。初回無料相談。",
   keywords: "製造業 DX, アナログ業務 効率化, 紙 FAX システム化, 中小製造業 AI 業務改善, 現場 IT 導入 支援",
+  alternates: {
+    canonical: "https://gdesign-partners.co.jp/lp/dx-field/",
+  },
   openGraph: {
     title: "製造業・アナログ業務の効率化｜AI活用DX支援 現場伴走型",
     description: "従来の1/3以下のコストでDX実現。IT人材ゼロでも現場が使えるまで一緒に走ります。",
